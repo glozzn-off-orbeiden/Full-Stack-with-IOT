@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+'use strict';
+
+/**
+ * Create database connection.
+ */
+
+const mongoose = require('mongoose');
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/homeautomation', {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+})
+
+const db = mongoose.connection;
+// attach listeners to the db connection
+db.on('error', console.error)
+
+db.once('open', function () {
+    console.log(`MongoDB is connected over http://127.0.0.1:27017/homeautomation !`);
+
+})
