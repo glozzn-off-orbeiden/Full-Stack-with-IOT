@@ -8,9 +8,9 @@ const path = require("path");
 /*
  **require Routes
  */
-//const controllerDashboard = require("../routes/routeDashboard.js")
-//const controllerTemp = require("../routes/routeTemp.js")
-//const controllerUser = require("../routes/routeUser.js")
+//const routeDashboard = require("../routes/routeDashboard.js")
+//const routeTemp = require("../routes/routeTemp.js")
+//const routeUser = require("../routes/routeUser.js")
 
 const errorMiddleware = require("./middleware/error");
 
