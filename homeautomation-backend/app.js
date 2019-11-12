@@ -11,6 +11,7 @@ const path = require("path");
 //const routeDashboard = require("../routes/routeDashboard.js")
 //const routeTemp = require("../routes/routeTemp.js")
 //const routeUser = require("../routes/routeUser.js")
+//const routeLight = require("../routes/routeLight.js")
 
 const errorMiddleware = require("./middleware/error");
 
