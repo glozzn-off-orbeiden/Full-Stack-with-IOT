@@ -5,9 +5,12 @@ const Schema = mongoose.Schema;
 
 
 const roomWeather = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
     temp:  {
         type: String
-
     },
     humidity: {
         type: String
