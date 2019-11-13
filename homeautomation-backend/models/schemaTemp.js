@@ -4,16 +4,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 
-const schemaTemp = new Schema({
-    indoor: {
-               type: Array,
-               default: []
-            },
-    outdoor: {
-        type: Array,
-        default: []
-     }
+const roomWeather = new Schema({
+    temp:  {
+        type: String
 
+    },
+    humidity: {
+        type: String
+    },
+    timeStamp: Date
 });
 
 modules.export = mongoose.model('Temperature', schemaTemp, "Temp");
+
