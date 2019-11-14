@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 
 const schemaStatus = new Schema({
-    Light: [
+    Light:
             {
                Light_Name: {
                    type: String,
@@ -16,7 +16,7 @@ const schemaStatus = new Schema({
                    default: 'off'
                },
             }
-        ],
+        ,
     Door:[
 
             {
@@ -44,7 +44,7 @@ const schemaStatus = new Schema({
         ]
 });
 
-modules.export = mongoose.model('Status', schemaStatus, "Status");
+module.exports = mongoose.model('Status', schemaStatus, "Status");
 
 
 

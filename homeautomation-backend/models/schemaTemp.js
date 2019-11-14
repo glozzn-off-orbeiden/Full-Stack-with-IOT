@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 
-const roomWeather = new Schema({
+const schemaTemp = new Schema({
     name: {
         type: String,
         required: true
@@ -18,5 +18,5 @@ const roomWeather = new Schema({
     timeStamp: Date
 });
 
-modules.export = mongoose.model('Temperature', schemaTemp, "Temp");
+module.exports = mongoose.model('Temperature', schemaTemp, "Temp");
 
