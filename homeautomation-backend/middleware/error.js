@@ -1,4 +1,4 @@
- 
+
 // error handler
 function handler(err, req, res, next) {
   // set locals, only providing error in development
@@ -6,6 +6,8 @@ function handler(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
+  console.log(err);
+  
   res.status(err.status || 500);  // if error.status is undefined, set status 5000
   res.send(err);
 };
