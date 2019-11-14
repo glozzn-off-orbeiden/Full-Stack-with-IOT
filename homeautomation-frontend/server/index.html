@@ -1,0 +1,15 @@
+<body style="background: rgba(94,64,84,0.5)"></body>
+<h2 style="text-align: center">Welcome to socket.io-test exercise</h2>
+
+<button>Update-color</button>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+  let socket = io();
+  let myButton = document.querySelector("button");
+  myButton.addEventListener("click", function() {
+    console.log("x-computer is connected");
+    socket.emit("update_content");
+  });
+</script>
