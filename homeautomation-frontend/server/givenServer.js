@@ -10,9 +10,9 @@ app.get("/", function(req, res) {
 });
 io.on("connection", function(socket) {
   console.log("server.js of socket.io is connected & id No. is : ", socket.id);
-  socket.on("update_content", () => {
-    console.log("update_content");
-    io.emit("update_content");
+  socket.on("x-computer is connected", () => {
+    console.log("x-computer is connected");
+    io.emit("x-computer is connected");
   });
 });
 

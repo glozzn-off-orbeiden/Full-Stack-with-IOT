@@ -4,6 +4,14 @@ import Dashboard from "./components/Dashboard";
 window.navigator.userAgent = "react-native";
 import io from "socket.io-client/dist/socket.io";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
 export default class App extends React.Component {
   /* constructor(props) {
     super(props);
@@ -14,10 +22,10 @@ export default class App extends React.Component {
   state = {
     name: "blue"
   };
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.socket = io("localhost:4000", { jsonp: false });
-    this.socket.on("update_content", () =>
+    this.socket.on("x-computer is connected", () =>
       this.setState({
         name: "green"
       })
@@ -33,13 +41,5 @@ export default class App extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
 
 //AppRegistry.registerComponent("App", () => App);
