@@ -1,4 +1,4 @@
-'use script'
+'use strict'
 
 const routeDashBoard = require('../routes/routeDashboard');
 const createError = require('http-errors');
@@ -10,7 +10,9 @@ async function fetchstatus(req, res, next) {
 console.log(req);
 
     try {
-        Status.findOne ({'Light': {$all:[]}}, function (err, Status) {
+        Status.findOne ({contribs:{
+            $elemMatch: 'Light'}
+        }, function (err, Status) {
             if (err) {
                 return next(createError(500, err.message))
             }
@@ -19,10 +21,10 @@ console.log(req);
              console.log(Status);
 
             res.send(Status)
-
-        //  } else if (Status !== 'on'){
-        //      res.send('off')
          }
+        //  else if (Status !== 'on'){
+        //      res.send('off')
+        //  }
         })
     } catch (error) {
         () => res.send(error.message)
