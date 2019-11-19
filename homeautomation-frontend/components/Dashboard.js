@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Button } from "react-native";
 import { View, Card, Text } from "react-native-ui-lib";
 import Icon from "react-native-vector-icons/Ionicons";
-type Props = {};
-export default class Dashboard extends Component<Props> {
+import Time from "./Time";
+
+export default class Dashboard extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Card style={styles.topPart}>
           <View style={{ width: "50%" }}>
-            <Text>Time</Text>
+            <Time />
           </View>
           <View>
             <Text>Temperature</Text>
@@ -41,14 +42,12 @@ export default class Dashboard extends Component<Props> {
           <View
             style={{
               width: "50%",
-              alignItems: "center",
-              textAlign: "center"
+              alignItems: "center"
             }}
           >
             <Icon.Button
               name="ios-moon"
               backgroundColor="black"
-              marginLeft="1%"
               onPress={() => {
                 alert("You tapped the button!");
                 console.log("test");
@@ -73,10 +72,7 @@ const styles = StyleSheet.create({
   topPart: {
     flexDirection: "row",
     margin: "2%",
-    height: "25%",
-    borderRadius: 2,
-    borderWidth: 2,
-    borderColor: "green"
+    height: "20%"
   },
   mainPart: {
     margin: "2%",
