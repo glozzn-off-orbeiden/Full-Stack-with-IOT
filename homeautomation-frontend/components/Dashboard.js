@@ -3,8 +3,21 @@ import { AppRegistry, StyleSheet, Button } from "react-native";
 import { View, Card, Text } from "react-native-ui-lib";
 import Icon from "react-native-vector-icons/Ionicons";
 import Time from "./Time";
+import { fetchStatus } from "./api";
 
 export default class Dashboard extends Component {
+  state = {
+    Light: "",
+    Temp: "",
+    Door: "",
+    Window: ""
+  };
+  componentDidMount() {
+    const data = fetchStatus();
+    this.setState({
+      ...data
+    });
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -14,6 +27,7 @@ export default class Dashboard extends Component {
           </View>
           <View>
             <Text>Temperature</Text>
+            <Text>{this.state.Temp}</Text>
           </View>
         </Card>
         <View style={styles.mainPart}>
