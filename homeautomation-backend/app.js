@@ -14,7 +14,7 @@ const path = require("path");
 //const routeLight = require("../routes/routeLight.js")
 
 const errorMiddleware = require("./middleware/error");
-
+require('./middleware/mqtt')
 //const cors = require('cors');
 /*
  ** For development
