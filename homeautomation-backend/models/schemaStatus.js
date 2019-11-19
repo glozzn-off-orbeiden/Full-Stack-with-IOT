@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 
 
 const schemaStatus = new Schema({
-    Light:
-            {
+    Light: [
+{
                Light_Name: {
                    type: String,
                    required: true
@@ -15,8 +15,8 @@ const schemaStatus = new Schema({
                    type: String,
                    default: 'off'
                },
-            }
-        ,
+
+            }] ,
     Door:[
 
             {
