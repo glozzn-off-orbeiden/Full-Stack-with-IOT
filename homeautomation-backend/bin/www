@@ -8,7 +8,7 @@
 const app = require('../app');
 require('./data')
 const debug = require('debug')('test:server');
-const http = require('http'); // replace http everywhere with https for secure comunication!
+const https = require('https'); // replace http everywhere with https for secure comunication!
 
 /**
  * Get port from environment and store in Express.
@@ -23,18 +23,18 @@ app.set('port', port);
 /**
  * part of the HTTPS server creation.
  */
+const path = require('path');
+const fs = require('fs');
 
-// const fs = require('fs');
-
-// const options = {
-//     key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
-//     cert: fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
-// };
+const options = {
+    key: fs.readFileSync(path.resolve('../homeautomation-backend/bin/server.key')),
+    cert: fs.readFileSync(path.resolve('../homeautomation-backend/bin/server.cert'))
+};
 
 /**
  * Create HTTP server.
  */
-const server = http.createServer(app);// add options in front of app for https credentials
+const server = https.createServer(options, app);// add options in front of app for https credentials
 
 /**
  * Listen on provided port, on all network interfaces.
