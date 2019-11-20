@@ -37,7 +37,6 @@ function seed() {
     rawStatus[key].push(rawStat)
         }
         console.log(rawStatus);
-
     };
     // let rawUsers = [];
     // for (let i = 0; i < 20; i++) {
@@ -67,21 +66,20 @@ function seed() {
     //         openFees: [{}],
     //     };
     //     rawUsers.push(rawUser);
-​
-​
     // };
-​
     // Temperature.insert(rawTemps, function (error, docs) {
     //     console.log(`${docs.length} docs(Temps) inserted!`);
     //     console.log(docs[0]);
     //     process.exit(0);
     // })
-    Status.create(rawStatus/* , function (error, docs) {
+    Status.create(rawStatus/* , */ /* function (error, docs) {
         console.log(`${docs.length} docs(Status) inserted!`);
         console.log(docs[0]);
-​
-        process.exit(0);
+
+
     } */).then(res=>console.log(res)
-    )
+
+    ).then (() => process.exit(0))
+
 }
 
