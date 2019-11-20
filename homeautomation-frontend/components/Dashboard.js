@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Button } from "react-native";
 import { View, Card, Text } from "react-native-ui-lib";
 import Icon from "react-native-vector-icons/Ionicons";
+import FoundationIcon from "react-native-vector-icons/Foundation";
 import Time from "./Time";
 import { fetchStatus } from "./api";
 
 export default class Dashboard extends Component {
   state = {
     Light: "",
-    Temp: "",
+    currentTemp: "",
     Door: "",
     Window: ""
   };
@@ -27,7 +28,7 @@ export default class Dashboard extends Component {
           </View>
           <View>
             <Text>Temperature</Text>
-            <Text>{this.state.Temp}</Text>
+            <Text>{this.state.currentTemp}</Text>
           </View>
         </Card>
         <View style={styles.mainPart}>
@@ -42,8 +43,13 @@ export default class Dashboard extends Component {
             </Card>
           </View>
           <View style={{ width: "50%", height: "100%" }}>
-            <Card style={{ width: "90%", height: "90%" }}>
-              <Text>Lights</Text>
+            <Card style={styles.light}>
+              <FoundationIcon
+                style={{ fontSize: 50 }}
+                name="lightbulb"
+                color={this.state.Light == "on" ? "#1DA664" : "#DE5347"}
+                onPress={() => console.log("hello")}
+              />
             </Card>
           </View>
         </View>
@@ -64,7 +70,6 @@ export default class Dashboard extends Component {
               backgroundColor="black"
               onPress={() => {
                 alert("You tapped the button!");
-                console.log("test");
               }}
             ></Icon.Button>
           </View>
@@ -105,5 +110,11 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     borderWidth: 2,
     borderColor: "black"
+  },
+  light: {
+    width: "90%",
+    height: "90%",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
