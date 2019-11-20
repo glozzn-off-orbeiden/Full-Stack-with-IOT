@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 const schemaStatus = new Schema({
     Light: [
             {
-               Light_Name: {
+                _id: {type: String},
+               Name: {
                    type: String,
                    required: true
                },
@@ -21,7 +22,8 @@ const schemaStatus = new Schema({
     Door:[
 
             {
-                Door_Name: {
+                _id: {type: String},
+                Name: {
                     type: String,
                     required: true
                 },
@@ -33,7 +35,8 @@ const schemaStatus = new Schema({
         ],
     Window:[
             {
-                Window_Name: {
+                _id: {type: String},
+                Name: {
                     type: String,
                     required: true
                 },
@@ -44,7 +47,7 @@ const schemaStatus = new Schema({
 
             }
         ]
-}, {_id: false });
+}/* , {_id: false } */);
 
 module.exports = mongoose.model('Status', schemaStatus, "Status");
 
