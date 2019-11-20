@@ -15,9 +15,9 @@ import { NativeModulesProxy } from "@unimodules/core";
 function fetchStatus() {
   return {
     Light: "off",
-    currentTemp: "23 C",
+    CurrentTemp: "23 C",
     Door: "open",
-    Window: "closed"
+    Window: "open"
   };
 }
 
