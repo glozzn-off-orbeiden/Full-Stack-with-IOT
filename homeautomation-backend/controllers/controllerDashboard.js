@@ -7,29 +7,72 @@ const Temp = require('../models/schemaTemp');
 
 async function fetchstatus(req, res, next) {
 
-console.log(req);
-
+    // console.log(req);
+    let data = {
+        Lights: "",
+        Doors: "",
+        Windows: "",
+        currentTemp: "23"
+    };
     try {
-        Status.findOne ({contribs:{
-            $elemMatch: 'Light'}
-        }, function (err, Status) {
-            if (err) {
-                return next(createError(500, err.message))
-            }
+        await Status.findOne({ "Light.Status": "on" },{_id:0, Light: {$elemMatch: {Status: "on"}}}
+        , function (err, Status) {
 
-         if(Status){
-             console.log(Status);
+                if (err) {
+                    return next(createError(500, err.message))
+                }
+                if (Status !== null) {
+                    console.log(Status);
+                    data = { ...data, Lights: "on" }
+                }
+                else {
+                    data = { ...data, Lights: "off" }
+                    console.log(Status);
 
-            res.send(Status)
-         }
-        //  else if (Status !== 'on'){
-        //      res.send('off')
-        //  }
-        })
+                }
+            })
     } catch (error) {
         () => res.send(error.message)
     }
+    try {
+        await Status.findOne({ "Door.Status": "open" },/*  {_id:0, Door: {$elemMatch: {Status: "on"}}}
+        , */ function (err, Status) {
 
+                if (err) {
+                    return next(createError(500, err.message))
+                }
+
+                if (Status !== null) {
+                    console.log(Status.Doors);
+                    data = { ...data, Doors: "open" }
+                }
+                else {
+                    data = { ...data, Doors: "closed" }
+                }
+            })
+    } catch (error) {
+        () => res.send(error.message)
+    }
+    try {
+        await Status.findOne({ "Window.Status": "open" },/*  {_id:0, Window: {$elemMatch: {Status: "on"}}}
+        , */ function (err, Status) {
+
+                if (err) {
+                    return next(createError(500, err.message))
+                }
+
+                if (Status !== null) {
+                    console.log(Status.Windows);
+                    data = { ...data, Windows: "open" }
+                }
+                else {
+                    data = { ...data, Windows: "closed" }
+                }
+            })
+    } catch (error) {
+        () => res.send(error.message)
+    }
+    res.send(data)
 }
 
 module.exports = {
