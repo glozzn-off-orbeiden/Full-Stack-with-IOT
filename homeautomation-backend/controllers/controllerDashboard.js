@@ -74,3 +74,7 @@ async function fetchstatus(req, res, next) {
     }
     res.send(data)
 }
+
+module.exports = {
+    status: fetchstatus
+}
