@@ -1,6 +1,6 @@
 //const faker = require("faker/local/de");
 const Status = require("./models/schemaStatus");
-//const Temperature = require("./models/schemaTemp");
+const Temperature = require("./models/schemaTemp");
 
 const mongoose = require("mongoose");
 
@@ -38,6 +38,24 @@ function seed() {
         }
         console.log(rawStatus);
     };
+    let rawTemps = {
+        indoor: [],
+        outdoor: []
+    };
+    for (const key in rawTemps) {
+        console.log(key);
+
+        for(let i = 0; i < 10; i++) {
+            let rawTemps = {
+                name: `${key} ${i}`,
+                temp: "",
+                humidity: "",
+                timeStamp: []
+            }
+    rawTemps[key].push(rawTemp)
+        }
+        console.log(rawTemps);
+    };
     // let rawUsers = [];
     // for (let i = 0; i < 20; i++) {
     //     let rawUser = {
@@ -72,6 +90,11 @@ function seed() {
     //     console.log(docs[0]);
     //     process.exit(0);
     // })
+    Temperature.create(rawTemps/* , function (error, docs) {
+    //     console.log(`${docs.length} docs(Status) inserted!`);
+    //     console.log(docs[0]); */
+
+    /* } */).then(res=>console.log(res)
     Status.create(rawStatus/* , */ /* function (error, docs) {
         console.log(`${docs.length} docs(Status) inserted!`);
         console.log(docs[0]);
