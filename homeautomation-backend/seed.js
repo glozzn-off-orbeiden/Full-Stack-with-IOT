@@ -45,16 +45,16 @@ function seed() {
     for (const key in rawTemps) {
         console.log(key);
 
-        for(let i = 0; i < 10; i++) {
-            let rawTemps = {
+        for(let i = 0; i < 5; i++) {
+            let rawTemp = {
                 name: `${key} ${i}`,
-                temp: "",
-                humidity: "",
-                timeStamp: []
+                temp: `${i + 10}`,
+                humidity: `${i + 60}`,
+                timeStamp: Date()
             }
     rawTemps[key].push(rawTemp)
         }
-        console.log(rawTemps);
+        console.log('hello', rawTemps);
     };
     // let rawUsers = [];
     // for (let i = 0; i < 20; i++) {
@@ -94,7 +94,7 @@ function seed() {
     //     console.log(`${docs.length} docs(Status) inserted!`);
     //     console.log(docs[0]); */
 
-    /* } */).then(res=>console.log(res)
+    /* } */).then(res=>console.log(res))
     Status.create(rawStatus/* , */ /* function (error, docs) {
         console.log(`${docs.length} docs(Status) inserted!`);
         console.log(docs[0]);
