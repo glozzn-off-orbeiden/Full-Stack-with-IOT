@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { AppRegistry } from "react-native";
 import { View, Card, Text } from "react-native-ui-lib";
+//import io from "socket.io-client";
+
 export default class Dashboard extends Component {
   render() {
     return (

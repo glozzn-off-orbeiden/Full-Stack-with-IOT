@@ -15,16 +15,16 @@ const path = require("path");
 
 const errorMiddleware = require("./middleware/error");
 
-//const cors = require('cors');
+const cors = require("cors");
 /*
  ** For development
  */
 
-// let corsOptions = {
-//     origin: 'http://localhost:3000',
-//     optionsSuccessStatus: 200
-//   }
-// app.use(cors(corsOptions));
+let corsOptions = {
+  origin: "http://localhost",
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 /*
  ** serves all the static files in the /public directory in the project root

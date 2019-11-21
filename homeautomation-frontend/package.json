@@ -15,9 +15,9 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-ui-lib": "^3.40.0",
     "react-native-web": "^0.11.7",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0"
+    "socket.io-client": "^1.7.2"
   },
+  "proxy": "https://localhost:3001",
   "devDependencies": {
     "babel-preset-expo": "^7.1.0"
   },

@@ -1,0 +1,33 @@
+<header>
+  <!-- newly added  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+</header>
+
+<body style="background: rgba(94,64,84,0.5)"></body>
+<h2 style="text-align: center">Welcome to socket.io-test exercise</h2>
+
+<button>Update-color</button>
+<div id="output"></div>
+<!-- <script src="/socket.io/socket.io.js"></script> -->old one
+
+<script>
+  let socket; //newly added
+  socket = io("https://localhost:3001");
+  //socket = io.connect("http://localhost:3001"); //newly added
+  /* socket.on("passed_message", clientSideFunc); //newly added
+  function clientSideFunc(data) {
+    //newly added
+    console.log(); //newly added
+  } */
+  socket.emit("newMessage", "my new message");
+  socket.on("messageToAll", function(data) {
+    let output = document.querySelector("#output");
+    console.log(data);
+    output.innerHTML += `<p><strong>${data} :</strong></p>`;
+  });
+  let myButton = document.querySelector("button");
+  myButton.addEventListener("click", function() {
+    console.log("x-computer is connected");
+    socket.emit("x-computer is connected");
+  });
+</script>
