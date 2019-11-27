@@ -5,7 +5,7 @@ import keepAwake from "react-native-keep-awake";
 
 const styles = StyleSheet.create({
   timeText: {
-    fontSize: 35,
+    fontSize: 30,
     margin: 5,
     marginTop: 30
   },
