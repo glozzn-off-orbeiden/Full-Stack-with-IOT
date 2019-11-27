@@ -34,14 +34,12 @@ app.set("port", port);
 const server = http.createServer(app); // add options in front of app for https credentials
 const io = require("socket.io")(server);
 
-io.on("connection", function(socket) {
-  console.log(socket.id);
-  socket.emit("updated");
+io.on("connection", function (socket) {
+  console.log('client connected on :', socket.id);
 });
-io.on("updated", function(data) {
-  console.log("updated", data);
-  io.emit("updated");
-});
+io.on('disconnect', function (socket) {
+  console.log('client disconnected from:', socket.id)
+})
 
 /**
  * Listen on provided port, on all network interfaces.
