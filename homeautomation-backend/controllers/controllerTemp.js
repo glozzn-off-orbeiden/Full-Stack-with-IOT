@@ -16,7 +16,7 @@ async function fetchtemp(req, res, next) {
     };
 
     try {
-        await Temperature.findOne({ "Temperature": "" },{_id:0, Temperature: {$elemMatch: {indoor: ""}}}
+        await Temperature.find({ "Temperature": "" },{_id:0, Temperature: {indoor}}
         , function (err, Temperature) {
 
                 if (err) {
