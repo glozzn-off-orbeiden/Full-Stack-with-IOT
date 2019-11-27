@@ -10,18 +10,20 @@ async function fetchtemp(req, res, next) {
 
     // console.log(req);
     let data = {
-        currentTemp: "23"
+        currentTemp: "23",
+        indoor: "",
+        outdoor: ""
     };
 
 try {
-    await Status.findOne({ "Temperature": "" },{_id:0, Light: {$elemMatch: {Status: "on"}}}
-    , function (err, Status) {
+    await Temperature.findOne({ "Temperature": "" },{_id:0, Temperature: {$elemMatch: {temp: ""}}}
+    , function (err, Temperature) {
 
             if (err) {
                 return next(createError(500, err.message))
             }
             if (Status !== null) {
-                console.log(Status);
+                console.log(Temperature);
                 data = { ...data, Lights: "on" }
             }
             else {
