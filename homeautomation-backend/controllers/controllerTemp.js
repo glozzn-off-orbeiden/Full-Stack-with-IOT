@@ -15,23 +15,28 @@ async function fetchtemp(req, res, next) {
         outdoor: ""
     };
 
-try {
-    await Temperature.findOne({ "Temperature": "" },{_id:0, Temperature: {$elemMatch: {temp: ""}}}
-    , function (err, Temperature) {
+    try {
+        await Temperature.findOne({ "Temperature": "" },{_id:0, Temperature: {$elemMatch: {indoor: ""}}}
+        , function (err, Temperature) {
 
-            if (err) {
-                return next(createError(500, err.message))
-            }
-            if (Status !== null) {
-                console.log(Temperature);
-                data = { ...data, Lights: "on" }
-            }
-            else {
-                data = { ...data, Lights: "off" }
-                console.log(Status);
+                if (err) {
+                    return next(createError(500, err.message))
+                }
+                if (Status !== null) {
+                    console.log(Temperature);
+                    data = { ...data, Lights: "on" }
+                }
+                else {
+                    data = { ...data, Lights: "off" }
+                    console.log(Status);
 
-            }
-        })
-} catch (error) {
-    () => res.send(error.message)
+                }
+            })
+    } catch (error) {
+        () => res.send(error.message)
+    }
+}
+
+module.exports = {
+    temps: fetchtemp
 }
