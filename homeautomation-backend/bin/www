@@ -20,12 +20,12 @@ app.set("port", port);
 /**
  * part of the HTTPS server creation.
  */
-
-// const fs = require('fs');
+// const path = require("path");
+// const fs = require("fs");
 
 // const options = {
-//     key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
-//     cert: fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
+//   key: fs.readFileSync(path.resolve("./bin/server.key")),
+//   cert: fs.readFileSync("./bin/server.cert")
 // };
 
 /**

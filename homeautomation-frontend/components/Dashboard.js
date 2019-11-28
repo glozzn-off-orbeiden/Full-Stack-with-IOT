@@ -1,26 +1,37 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Button } from "react-native";
-import { View, Card, Text, Slider } from "react-native-ui-lib";
+import { AppRegistry, StyleSheet, View, Button, Text } from "react-native";
+import { Card, Switch } from "react-native-ui-lib";
 import Icon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
 import Time from "./Time";
-import { fetchStatus } from "./api";
+import fetchStatus from "./api";
 
 const INITIAL_VALUE = 0;
 export default class Dashboard extends Component {
   state = {
-    Light: "",
-    CurrentTemp: "",
-    Door: "",
-    Window: "",
+    Lights: "off",
+    currentTemp: 34,
+    Doors: "open",
+    Windows: "closed",
     sliderValue: INITIAL_VALUE
   };
-  componentDidMount() {
-    const data = fetchStatus();
+
+  /* componentDidMount() {
+    this.socket.on("alert", function(data) {
+      Alert.alert("Alert Title", "My Alert Msg");
+    });
+  } */
+  async componentDidMount() {
+    const data = await fetchStatus();
+    console.log("promise?", data);
+
     this.setState({
-      ...data
+      Lights: data.Lights,
+      currentTemp: data.currentTemp,
+      Doors: data.Doors,
+      Windows: data.Windows
     });
   }
 
@@ -29,6 +40,7 @@ export default class Dashboard extends Component {
   };
 
   render() {
+    console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
       <View style={styles.container}>
         <Card style={styles.topPart}>
@@ -37,23 +49,28 @@ export default class Dashboard extends Component {
           </View>
           <View>
             <Text>Temperature</Text>
-            <Text>{this.state.CurrentTemp}</Text>
+            <Text>{this.state.currentTemp} &#8451;</Text>
           </View>
         </Card>
         <View style={styles.mainPart}>
-          <View style={{ width: "50%", height: "50%" }}>
+          <View
+            style={{
+              width: "50%",
+              height: "100%",
+              flexDirection: "column",
+              alignContent: "space-around"
+            }}
+          >
             <Card style={styles.window}>
               <WindowIcon
                 style={{ fontSize: 40 }}
-                name={this.state.Window == "open" ? "windowso" : "windows"}
+                name={this.state.Windows == "open" ? "windowso" : "windows"}
               />
             </Card>
-          </View>
-          <View style={{ width: "50%", height: "50%" }}>
             <Card style={styles.door}>
               <DoorIcon
                 style={{ fontSize: 40 }}
-                name={this.state.Door == "open" ? "door-open" : "door-closed"}
+                name={this.state.Doors == "open" ? "door-open" : "door-closed"}
               />
             </Card>
           </View>
@@ -62,7 +79,7 @@ export default class Dashboard extends Component {
               <FoundationIcon
                 style={{ fontSize: 50 }}
                 name="lightbulb"
-                color={this.state.Light == "on" ? "#1DA664" : "#DE5347"}
+                color={this.state.Lights == "on" ? "#1DA664" : "#DE5347"}
                 onPress={() => console.log("hello")}
               />
             </Card>
@@ -72,6 +89,7 @@ export default class Dashboard extends Component {
           <View style={{ width: "50%" }}>
             <Card style={{ width: "90%", height: "90%" }}>
               <Text>Door on/off</Text>
+              <Switch name="onColor" type="red"></Switch>
             </Card>
           </View>
           <View style={styles.moon}>
@@ -94,20 +112,11 @@ export default class Dashboard extends Component {
             </Card>
           </View>
         </View>
-        {/* <Slider
-          style={{ width: 10 }}
-          onValueChange={this.onSliderValueChange}
-          value={INITIAL_VALUE}
-          minimumValue={0}
-          maximumValue={100}
-          step={1}
-          containerStyle={styles.sliderContainer}
-        />*/}
       </View>
     );
   }
 }
-AppRegistry.registerComponent("Dashboard", () => Dashboard);
+/* AppRegistry.registerComponent("Dashboard", () => Dashboard); */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -150,13 +159,14 @@ const styles = StyleSheet.create({
   },
   door: {
     width: "90%",
-    height: "90%",
+    height: "40%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 10
   },
   window: {
     width: "90%",
-    height: "90%",
+    height: "40%",
     justifyContent: "center",
     alignItems: "center"
   }

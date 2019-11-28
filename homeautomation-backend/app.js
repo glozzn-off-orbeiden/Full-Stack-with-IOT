@@ -8,6 +8,9 @@ const path = require("path");
 /*
  **require Routes
  */
+
+ 
+const routeTemp = require("../homeautomation-backend/routes/routeTemp.js")
 const routeDashboard = require("../homeautomation-backend/routes/routeDashboard");
 //const routeTemp = require("../routes/routeTemp.js")
 //const routeUser = require("../routes/routeUser.js")
@@ -15,10 +18,7 @@ const routeDashboard = require("../homeautomation-backend/routes/routeDashboard"
 
 const errorMiddleware = require("./middleware/error");
 require("./middleware/mqtt");
-//const cors = require();
-/*
- ** For development
- */
+ 
 
 // let corsOptions = {
 //     origin: 'http://localhost:3000',
@@ -27,13 +27,22 @@ require("./middleware/mqtt");
 //app.use(cors);
 
 /*
+ ** For development
+ */
+const cors = require("cors");
+ 
+app.use(cors(/* corsOptions */));
+
+/*
  ** serves all the static files in the /public directory in the project root
  */
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/status/", routeDashboard);
-//app.use('/temp/', routeTemp);
+ 
+app.use("/status/", routeDashboard)
+app.use("/temp/", routeTemp);
+ 
 //app.use('/user/', routeUser);
 
 app.use(errorMiddleware.handler);
