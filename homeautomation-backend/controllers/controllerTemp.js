@@ -2,7 +2,7 @@
 
 const routeDashBoard = require('../routes/routeDashboard');
 const createError = require('http-errors');
-const Temp = require('../models/schemaTemp');
+const Temperature = require('../models/schemaTemp');
 //const mqtt = require('../middleware/mqtt');
 
 
