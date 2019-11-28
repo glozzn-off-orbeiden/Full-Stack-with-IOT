@@ -1,5 +1,7 @@
-var mqtt = require('mqtt')
-var client  = mqtt.connect({host: 'localhost', port: 1883})
+const mqtt = require('mqtt');
+const client  = mqtt.connect({host: 'localhost', port: 1883});
+
+const doorbellON = require('../controllers/controllerMQTT');
 
 client.on('connect', function () {
     // client.subscribe('presence', function (err) {
@@ -16,6 +18,8 @@ client.on('connect', function () {
       
     }
   } )
+
+  client.subscribe('sensors/Doorbell/ON', doorbellON)
    
   client.on('message', function (topic, message) {
     // message is Buffer

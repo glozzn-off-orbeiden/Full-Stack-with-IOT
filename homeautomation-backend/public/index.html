@@ -1,0 +1,26 @@
+<body style="background: rgba(94,64,84,0.5)"></body>
+<h1 style="text-align: center">Welcome to socket.io-test exercise</h1>
+
+<!-- <header>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+</header> -->
+
+<button>Update-color</button>
+<script src="/socket.io/socket.io.js"></script>
+<div id="output"></div>
+
+<script>
+  let myDiv = document.querySelector("#output");
+  let socket = io("https://b0d22bfc.ngrok.io"); //newly added
+  socket.connect();
+  //socket = io("http://localhost:4000"); /* https://localhost:3001 */
+  socket.on("updated", () => {
+    myDiv.innerHTML += `<p>${data}</p>`;
+  });
+
+  let myButton = document.querySelector("button");
+  myButton.addEventListener("click", function() {
+    socket.emit("updated");
+    console.log("updated", "btn works");
+  });
+</script>
