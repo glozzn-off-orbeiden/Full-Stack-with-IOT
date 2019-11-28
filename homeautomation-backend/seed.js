@@ -4,30 +4,29 @@ const Temperature = require("./models/schemaTemp");
 
 const mongoose = require("mongoose");
 
-mongoose.connect(
-    'mongodb://127.0.0.1:27017/homeautomationtest', {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true
-    });
+mongoose.connect("mongodb://127.0.0.1:27017/homeautomation", {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+});
 const db = mongoose.connection;
 
-db.on("error", function () {
-    process.exit(1);
-})
-db.once("open", function () {
-    console.log("Inserting data...");
-    seed();
-})
+db.on("error", function() {
+  process.exit(1);
+});
+db.once("open", function() {
+  console.log("Inserting data...");
+  seed();
+});
 
 function seed() {
-    let rawStatus = {
-        Light: [],
-        Door: [],
-        Window: []
-    };
-    for (const key in rawStatus) {
-        console.log(key);
+  let rawStatus = {
+    Light: [],
+    Door: [],
+    Window: []
+  };
+  for (const key in rawStatus) {
+    console.log(key);
 
         for(let i = 0; i < 10; i++) {
             let rawStat = {
@@ -96,13 +95,8 @@ function seed() {
 
     /* } */).then(res=>console.log(res))
     Status.create(rawStatus/* , */ /* function (error, docs) {
-        console.log(`${docs.length} docs(Status) inserted!`);
-        console.log(docs[0]);
-
-
-    } */).then(res=>console.log(res)
-
-    ).then (() => process.exit(0))
-
+ 
+  )
+    .then(res => console.log(res))
+    .then(() => process.exit(0));
 }
-
