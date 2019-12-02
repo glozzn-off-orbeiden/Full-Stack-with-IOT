@@ -7,9 +7,10 @@ const Lights = require('../models/schemaStatus');
 
 
 async function fetchlights(req, res, next) {
+console.log('test');
 
     try {
-        await Status.find({"Lights.Status": ""}
+        await Lights.find({}, {$exists: Light}
         , function (err, Lights) {
 
                 if (err) {
