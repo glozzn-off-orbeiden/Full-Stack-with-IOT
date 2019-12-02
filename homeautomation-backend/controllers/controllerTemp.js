@@ -8,11 +8,7 @@ const Temperature = require('../models/schemaTemp');
 
 async function fetchtemp(req, res, next) {
 
-    // console.log(req);
-    let data = {
-        indoor: [],
-        outdoor: []
-    };
+    // console.log(req)
 
     try {
         await Temperature.find({}
