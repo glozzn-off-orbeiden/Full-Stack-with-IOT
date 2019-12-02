@@ -26,7 +26,7 @@ const schemaTemp = new Schema({
         timeStamp: Date
     }]]
 });
- 
+
 
 module.exports = mongoose.model('Temperature', schemaTemp, "Temp");
 
