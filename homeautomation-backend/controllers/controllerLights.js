@@ -10,7 +10,7 @@ async function fetchlights(req, res, next) {
 console.log('test');
 
     try {
-        await Lights.find({}, {$exists: Light}
+        await Lights.find({}, {Light: true}
         , function (err, Lights) {
 
                 if (err) {
