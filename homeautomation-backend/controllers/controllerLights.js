@@ -2,21 +2,21 @@
 
 const routeDashBoard = require('../routes/routeDashboard');
 const createError = require('http-errors');
-const Temp = require('../models/schemaTemp');
+const Lights = require('../models/schemaStatus');
 //const mqtt = require('../middleware/mqtt');
 
 
-async function fetchtemp(req, res, next) {
+async function fetchlights(req, res, next) {
 
     try {
-        await Temperature.find({}
-        , function (err, Temp) {
+        await Status.find({"Lights.Status": ""}
+        , function (err, Lights) {
 
                 if (err) {
                     return next(createError(500, err.message))
                 }
 
-                res.send(Temp)
+                res.send(Lights)
                 }
             )
     } catch (error) {
@@ -25,5 +25,5 @@ async function fetchtemp(req, res, next) {
 }
 
 module.exports = {
-    fetchtemp: fetchtemp
+    fetchlights: fetchlights
 }
