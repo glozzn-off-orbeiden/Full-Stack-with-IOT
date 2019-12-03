@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, View, Button, Text } from "react-native";
-import { Card, Switch } from "react-native-ui-lib";
 import Icon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
+import { Card } from "react-native-elements";
 import Time from "./Time";
 import fetchStatus from "./api";
 
