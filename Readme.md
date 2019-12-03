@@ -21,8 +21,6 @@ Furthermore, users receive the current temperature; both indoor and outdoor.
 * Socket.IO
 * Node.js
 * MongoDB
-* Postman
-* Robo3T
-* NPM
+
 
 
