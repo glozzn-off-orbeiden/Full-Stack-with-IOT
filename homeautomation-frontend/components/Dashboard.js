@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+ 
 import { 
+    Alert,
     AppRegistry, 
     StyleSheet, 
     View, 
@@ -17,6 +19,7 @@ import SortableGrid from "react-native-sortable-grid";
 import { Card } from "react-native-elements";
 import Time from "./Time";
 import fetchStatus from "./api";
+import alertHandler from "./alerthandler";
 
 const INITIAL_VALUE = 0;
 export default class Dashboard extends Component {
@@ -28,27 +31,37 @@ export default class Dashboard extends Component {
     MainDoor: "locked"
   };
 
-  /* componentDidMount() {
-    this.socket.on("alert", function(data) {
-      Alert.alert("Alert Title", "My Alert Msg");
-    });
-  } */
-  // async componentDidMount() {
-  //   const data = await fetchStatus();
-  //   console.log("promise?", data);
+  fetchData = async () => {
+    try {
+      const data = await fetchStatus();
+      // console.log("promise?", data);
 
-  //   this.setState({
-  //     Lights: data.Lights,
-  //     currentTemp: data.currentTemp,
-  //     Doors: data.Doors,
-  //     Windows: data.Windows
-  //   });
-  // }
+      this.setState({
+        Lights: data.Lights,
+        currentTemp: data.currentTemp,
+        Doors: data.Doors,
+        Windows: data.Windows
+      });
+    } catch (err) {
+      () => {
+        console.log(err)
+      }
+    }
+  }
 
-  
+  componentDidMount() {
+
+    this.fetchData()
+    alertHandler()
+  }
+
+
+  onSliderValueChange = value => {
+    this.setState({ sliderValue: value });
+  };
 
   render() {
-    console.log("2. fgtftdftdtfdt", this.state.Windows);
+    //console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
       <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
 

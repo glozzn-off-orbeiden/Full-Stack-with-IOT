@@ -7,14 +7,14 @@ export default async function fetchStatus() {
       "Content-Type": "application/json"
     }
   };
-  console.log("hello");
+  //console.log("hello");
 
   try {
-    console.log("hello2");
+    //console.log("hello2");
 
-    let res = await fetch("https://035e1058.ngrok.io/status/", option);
+    let res = await fetch("https://6a70c78f.ngrok.io/status", option);
     let data = await res.json();
-    console.log("api call", data);
+    //console.log("api call", data);
 
     return data;
   } catch (error) {
