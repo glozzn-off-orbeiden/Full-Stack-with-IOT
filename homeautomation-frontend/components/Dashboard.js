@@ -1,9 +1,19 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, View, Button, Text } from "react-native";
+import { 
+    AppRegistry, 
+    StyleSheet, 
+    View, 
+    Button, 
+    Text,
+    ImageBackground,
+    ScrollView
+  } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
+import KeyIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
+import SortableGrid from "react-native-sortable-grid";
 import { Card } from "react-native-elements";
 import Time from "./Time";
 import fetchStatus from "./api";
@@ -11,11 +21,11 @@ import fetchStatus from "./api";
 const INITIAL_VALUE = 0;
 export default class Dashboard extends Component {
   state = {
-    Lights: "off",
+    Lights: "on",
     currentTemp: 34,
     Doors: "open",
     Windows: "closed",
-    sliderValue: INITIAL_VALUE
+    MainDoor: "locked"
   };
 
   /* componentDidMount() {
@@ -23,96 +33,144 @@ export default class Dashboard extends Component {
       Alert.alert("Alert Title", "My Alert Msg");
     });
   } */
-  async componentDidMount() {
-    const data = await fetchStatus();
-    console.log("promise?", data);
+  // async componentDidMount() {
+  //   const data = await fetchStatus();
+  //   console.log("promise?", data);
 
-    this.setState({
-      Lights: data.Lights,
-      currentTemp: data.currentTemp,
-      Doors: data.Doors,
-      Windows: data.Windows
-    });
-  }
+  //   this.setState({
+  //     Lights: data.Lights,
+  //     currentTemp: data.currentTemp,
+  //     Doors: data.Doors,
+  //     Windows: data.Windows
+  //   });
+  // }
 
-  onSliderValueChange = value => {
-    this.setState({ sliderValue: value });
-  };
+  
 
   render() {
     console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
-      <View style={styles.container}>
-        <Card style={styles.topPart}>
-          <View style={{ width: "50%" }}>
-            <Time />
+      <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
+
+        <ScrollView style={styles.mainPart}>
+
+          {/* <Card style={styles.topPart}>
+            <View style={{ width: "50%" }}>
+              <Time />
+            </View>
+            <View>
+              <Text>Temperature</Text>
+              <Text>{this.state.currentTemp} &#8451;</Text>
+            </View>
+          </Card> */}
+          <View style={styles.topPart}>
+
+            <View key="topPart" style={[styles.item, styles.flexTop]}>
+               
+                <View style={{ width: "50%" }}>
+                  <Time />
+                </View>
+                <View style={styles.temp}>
+                  <Text style={styles.tempText}>{this.state.currentTemp}&#8451;</Text>
+                </View>
+            </View>
+                  
           </View>
-          <View>
-            <Text>Temperature</Text>
-            <Text>{this.state.currentTemp} &#8451;</Text>
+
+          <View style={styles.statusBox}>
+
+            <View style={[styles.item, styles.itemStatusBox]}>
+              <View 
+                style={[styles.icon, {backgroundColor: this.state.Doors === "open" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                <DoorIcon
+                  style={{fontSize: 30}} 
+                  onPress={() => console.log("Door")}
+                  name={this.state.Doors == "open" ? "door-open" : "door-closed"}
+                  color="rgb(255,255,255)"
+                />
+              </View>
+            </View>
+
+
+            <View style={[styles.item, styles.itemStatusBox]}>
+              <View
+                style={[styles.icon, {backgroundColor: this.state.Windows === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                <WindowIcon
+                  style={{fontSize: 40}} 
+                  onPress={() => console.log("Window")}
+                  name={this.state.Windows == "open" ? "windowso" : "windows"}
+                  color="rgb(255,255,255)"
+                />
+
+              </View>
+            </View>
+
+            
+
           </View>
-        </Card>
-        <View style={styles.mainPart}>
-          <View
-            style={{
-              width: "50%",
-              height: "100%",
-              flexDirection: "column",
-              alignContent: "space-around"
-            }}
-          >
-            <Card style={styles.window}>
-              <WindowIcon
-                style={{ fontSize: 40 }}
-                name={this.state.Windows == "open" ? "windowso" : "windows"}
-              />
-            </Card>
-            <Card style={styles.door}>
-              <DoorIcon
-                style={{ fontSize: 40 }}
-                name={this.state.Doors == "open" ? "door-open" : "door-closed"}
-              />
-            </Card>
+          
+          
+          
+          
+          <View style={styles.actionBox}>
+
+
+            <View style={styles.actionSort}>
+
+              <View style={[styles.item, styles.itemActionBox, {width: 140}]}>
+                <View
+                    style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+
+                    <FoundationIcon
+                        style={{fontSize: 30}} 
+                        onPress={() => console.log("lights")}
+                        name="lightbulb"
+                        color="rgb(255,255,255)"
+                    />
+
+                </View>
+              </View>
+
+              <View style={[styles.item, styles.itemActionBox]}>
+                <View
+                  style={[styles.icon, {backgroundColor: this.state.MainDoor === "unlocked" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                  <KeyIcon
+                      style={{ fontSize: 25 }}
+                      name="key"
+                      color="rgb(255,255,255)"
+                      onPress={() => {
+                        alert("You tapped the button!");
+                      }}
+                    />
+                </View>
+              </View>
+
+              <View style={[styles.item, styles.itemActionBox]}>
+                <View
+                  style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                  <Icon
+                    style={{ fontSize: 35 }}
+                    name="ios-moon"
+                    color="rgb(255,255,255)"
+                    onPress={() => {
+                      alert("You tapped the button!");
+                    }}
+                  />
+                </View>
+              </View>
+
+            </View>
+
+
+            <View style={styles.actionSort}>
+            </View>
+
           </View>
-          <View style={{ width: "50%", height: "100%" }}>
-            <Card style={styles.light}>
-              <FoundationIcon
-                style={{ fontSize: 50 }}
-                name="lightbulb"
-                color={this.state.Lights == "on" ? "#1DA664" : "#DE5347"}
-                onPress={() => console.log("hello")}
-              />
-            </Card>
-          </View>
-        </View>
-        <View style={styles.downPart}>
-          <View style={{ width: "50%" }}>
-            <Card style={{ width: "90%", height: "90%" }}>
-              <Text>Door on/off</Text>
-              <Switch name="onColor" type="red"></Switch>
-            </Card>
-          </View>
-          <View style={styles.moon}>
-            <Card
-              style={{
-                width: 70,
-                height: 70,
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <Icon
-                style={{ fontSize: 35 }}
-                name="ios-moon"
-                backgroundColor="black"
-                onPress={() => {
-                  alert("You tapped the button!");
-                }}
-              />
-            </Card>
-          </View>
-        </View>
-      </View>
+
+          <View style={styles.buffer}></View>
+
+        </ScrollView>
+      </ImageBackground>
     );
   }
 }
@@ -120,59 +178,90 @@ export default class Dashboard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "90%",
-    height: "90%",
-    backgroundColor: "#eee",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.2)",
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: "red"
-  },
-  topPart: {
-    flexDirection: "row",
-    marginTop: 50,
-    margin: "2%",
-    height: "20%"
+    // borderColor: "red"
   },
   mainPart: {
-    margin: "2%",
-    padding: "2%",
-    height: "25%",
-    borderRadius: 2,
-    borderWidth: 2,
-    borderColor: "black",
-    flexWrap: "wrap"
+      backgroundColor: "rgba(0,0,0,0.2)",
+      borderRadius: 2,
+      borderWidth: 2,
+      // height: "100%",
+      paddingTop: 20,
+      paddingLeft: 10,
+      paddingRight: 10,
+      borderColor: "black",
   },
-  downPart: {
-    flexDirection: "row",
-    margin: "2%",
-    padding: "2%",
-    height: "25%",
-    borderRadius: 2,
-    borderWidth: 2,
-    borderColor: "black"
-  },
-  light: {
-    width: "90%",
-    height: "90%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  door: {
-    width: "90%",
+  topPart: {
     height: "40%",
+    marginBottom: 20,
+    borderColor: "red",
+  },
+  flexTop: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    margin: 10,
+  },
+  item: {
+    backgroundColor: "rgba(0,0,0,0.6)",
+    height: "90%",
+    borderRadius: 10,
+    marginBottom: 20
+  },
+  temp: {
+    width: "25%",
+  },
+  tempText: {
+    fontSize: 30,
+    color: "rgb(255,255,255)"
+  },
+  statusBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: "40%",
+    marginBottom: 10
+
+  },
+  itemStatusBox: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10
+    margin: 10,
+    height: 140,
+    width: 140
   },
-  window: {
-    width: "90%",
+  icon: {
+      height: "70%",
+      width: "70%",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 50,
+  },
+  actionBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     height: "40%",
+    marginBottom: 20
+  },
+  actionSort: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    margin: 10,
+    marginTop: 0,
+    height: 140,
+    width: 140,
+  },
+  itemActionBox: {
     justifyContent: "center",
-    alignItems: "center"
-  }
-  /* moon: {
-    width: "70%",
-    justifyContent: "center",
-    alignItems: "center"
-  } */
+    alignItems: "center",
+    height: 65,
+    width: 65
+  },
+  // buffer: {
+  //     height: 500
+  // }
 });

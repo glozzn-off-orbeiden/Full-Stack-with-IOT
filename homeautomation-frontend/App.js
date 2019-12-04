@@ -1,12 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { 
+    StyleSheet, 
+    Text, 
+    View } from "react-native";
 import Dashboard from "./components/Dashboard";
 import Lights from "./components/Lights";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Dashboard /> */}
+
+      <Dashboard />
       <Lights />
     </View>
   );

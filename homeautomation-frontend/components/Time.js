@@ -4,14 +4,15 @@ import moment from "moment";
 import keepAwake from "react-native-keep-awake";
 
 const styles = StyleSheet.create({
+  time: {
+    justifyContent: "space-around"
+  },
   timeText: {
     fontSize: 30,
-    margin: 5,
-    marginTop: 30
+    color: "rgb(255,255,255)"
   },
   dateText: {
-    marginTop: 10,
-    marginLeft: 10
+    color: "rgb(255,255,255)"
   }
 });
 
@@ -28,7 +29,7 @@ export default class Time extends Component {
       });
     }, 1000);
     return (
-      <View>
+      <View style={styles.time}>
         <Text style={styles.timeText}>{this.state.time}</Text>
         <Text style={styles.dateText}>{this.state.date}</Text>
       </View>
