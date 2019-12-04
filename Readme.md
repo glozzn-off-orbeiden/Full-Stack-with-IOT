@@ -13,7 +13,7 @@ Furthermore, users receive the current temperature; both indoor and outdoor.
 * MQTT Broker
 * Arduino
 * Microcontrollers
-* C
+* C++
 * JavaScript
 * React Native
 * React Native Stylesheet
@@ -21,8 +21,6 @@ Furthermore, users receive the current temperature; both indoor and outdoor.
 * Socket.IO
 * Node.js
 * MongoDB
-* Postman
-* Robo3T
-* NPM
+
 
 

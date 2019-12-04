@@ -6,47 +6,53 @@ const Schema = mongoose.Schema;
 
 const schemaStatus = new Schema({
     Light: [
-            {
-                _id: {type: String},
-               Name: {
-                   type: String,
-                   required: true
-               },
-               Status: {
-                   type: String,
-                   default: 'off'
-               }
+        {
+            Token: {
+                type: String,
+                require: true,
+                unique: true
+            },
 
+            Name: {
+                type: String,
+                required: true,
+                unique: true
+            },
+            Status: {
+                type: String,
+                default: 'off'
             }
-        ],
-    Door:[
 
-            {
-                _id: {type: String},
-                Name: {
-                    type: String,
-                    required: true
-                },
-                Status: {
-                    type: String,
-                    default: 'closed'
-                },
-            }
-        ],
-    Window:[
-            {
-                _id: {type: String},
-                Name: {
-                    type: String,
-                    required: true
-                },
-                Status: {
-                    type: String,
-                    default: 'closed'
-                }
+        }
+    ],
+    Door: [
 
+        {
+            _id: { type: String },
+            Name: {
+                type: String,
+                required: true
+            },
+            Status: {
+                type: String,
+                default: 'closed'
+            },
+        }
+    ],
+    Window: [
+        {
+            _id: { type: String },
+            Name: {
+                type: String,
+                required: true
+            },
+            Status: {
+                type: String,
+                default: 'closed'
             }
-        ]
+
+        }
+    ]
 }/* , {_id: false } */);
 
 module.exports = mongoose.model('Status', schemaStatus, "Status");
