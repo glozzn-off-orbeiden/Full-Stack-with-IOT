@@ -15,8 +15,6 @@ import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import KeyIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
-import SortableGrid from "react-native-sortable-grid";
-import { Card } from "react-native-elements";
 import Time from "./Time";
 import fetchStatus from "./api";
 import alertHandler from "./alerthandler";
@@ -193,15 +191,15 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0,0,0,0.2)",
-    borderRadius: 4,
-    borderWidth: 2,
+    // backgroundColor: "rgba(0,0,0,0.2)",
+    // borderRadius: 4,
+    // borderWidth: 2,
     // borderColor: "red"
   },
   mainPart: {
-      backgroundColor: "rgba(0,0,0,0.2)",
-      borderRadius: 2,
-      borderWidth: 2,
+      // backgroundColor: "rgba(0,0,0,0.2)",
+      // borderRadius: 2,
+      // borderWidth: 2,
       // height: "100%",
       paddingTop: 20,
       paddingLeft: 10,
