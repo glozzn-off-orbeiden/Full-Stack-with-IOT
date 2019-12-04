@@ -17,7 +17,7 @@ const routeDashboard = require("../homeautomation-backend/routes/routeDashboard"
 const routeLight = require("../homeautomation-backend/routes/routeLight")
 
 const errorMiddleware = require("./middleware/error");
-require("./middleware/mqtt");
+// require("./middleware/mqtt");
 
 
 // let corsOptions = {
