@@ -7,12 +7,17 @@ import {
     Button, 
     Text,
     ImageBackground,
-    ScrollView
+    ScrollView, 
+    Dimensions 
   } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 import Swiper from "react-native-swiper";
 import Dashboard from "./Dashboard";
 import Lights from "./Lights";
 
+let entireScreenWidth = Dimensions.get('window').width;
+
+EStyleSheet.build({$rem: entireScreenWidth / 360});
 
 export default class Slider extends Component {
     render(){
@@ -35,7 +40,7 @@ export default class Slider extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     wrapper: {
     },
     slide1: {
