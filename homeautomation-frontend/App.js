@@ -11,7 +11,7 @@ export default function App() {
     <View style={styles.container}>
 
       <Dashboard />
-      <Lights />
+      //<Lights />
     </View>
   );
 }
