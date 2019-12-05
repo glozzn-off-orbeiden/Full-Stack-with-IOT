@@ -1,6 +1,8 @@
-import { NativeModulesProxy } from "@unimodules/core";
+ import {url} from'../config.js';
 
-export default async function fetchStatus() {
+console.log(url);
+
+ async function fetchStatus() {
   const option = {
     method: "GET",
     headers: {
@@ -12,7 +14,7 @@ export default async function fetchStatus() {
   try {
     //console.log("hello2");
 
-    let res = await fetch("https://6a70c78f.ngrok.io/status", option);
+    let res = await fetch(url+"/status", option);
     let data = await res.json();
     //console.log("api call", data);
 
@@ -22,15 +24,28 @@ export default async function fetchStatus() {
   }
 }
 
-/* function fetchStatus() {
-  return {
-    Light: "off",
-    CurrentTemp: "23 C",
-    Door: "open",
-    Window: "open"
+ async function fetchLights() {
+  const option = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
   };
-} */
+  //console.log("hello");
 
-// module.exports = {
-//   fetchStatus: fetchStatus
-// };
+  try {
+    //console.log("hello2");
+
+    let res = await fetch(url+"/lights", option);
+    let data = await res.json();
+    //console.log("api call", data);
+
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
+
+
+
+export {fetchStatus,fetchLights};

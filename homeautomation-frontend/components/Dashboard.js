@@ -1,8 +1,6 @@
 import React, { Component } from "react";
  
 import { 
-    Alert,
-    AppRegistry, 
     StyleSheet, 
     View, 
     Button, 
@@ -17,7 +15,7 @@ import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import KeyIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
 import Time from "./Time";
-import fetchStatus from "./api";
+import {fetchStatus} from "./api";
 import alertHandler from "./alerthandler";
 import EStyleSheet from "react-native-extended-stylesheet";
 
@@ -29,10 +27,10 @@ EStyleSheet.build({$rem: entireScreenWidth / 360});
 const INITIAL_VALUE = 0;
 export default class Dashboard extends Component {
   state = {
-    Lights: "on",
+    Lights: "off",
     currentTemp: 34,
     Doors: "open",
-    Windows: "closed",
+    Windows: "open",
     MainDoor: "locked"
   };
 
@@ -61,11 +59,7 @@ export default class Dashboard extends Component {
   }
 
 
-  onSliderValueChange = value => {
-    this.setState({ sliderValue: value });
-  };
-
-  render() {
+ render() {
     //console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
       <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
@@ -119,20 +113,10 @@ export default class Dashboard extends Component {
                   name={this.state.Windows == "open" ? "windowso" : "windows"}
                   color="rgb(255,255,255)"
                 />
-
               </View>
             </View>
-
-            
-
           </View>
-          
-          
-          
-          
           <View style={styles.actionBox}>
-
-
             <View style={styles.actionSort}>
 
               <View style={[styles.item, styles.itemActionBox, styles.lightAction]}>
