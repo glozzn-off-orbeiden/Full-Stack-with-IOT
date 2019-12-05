@@ -8,18 +8,23 @@ import {
     Button, 
     Text,
     ImageBackground,
-    ScrollView
+    ScrollView, 
+    Dimensions 
   } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import KeyIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
-import SortableGrid from "react-native-sortable-grid";
-import { Card } from "react-native-elements";
 import Time from "./Time";
 import fetchStatus from "./api";
 import alertHandler from "./alerthandler";
+import EStyleSheet from "react-native-extended-stylesheet";
+
+let entireScreenWidth = Dimensions.get('window').width;
+
+EStyleSheet.build({$rem: entireScreenWidth / 360});
+
 
 const INITIAL_VALUE = 0;
 export default class Dashboard extends Component {
@@ -130,7 +135,7 @@ export default class Dashboard extends Component {
 
             <View style={styles.actionSort}>
 
-              <View style={[styles.item, styles.itemActionBox, {width: 140}]}>
+              <View style={[styles.item, styles.itemActionBox, styles.lightAction]}>
                 <View
                     style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
 
@@ -180,7 +185,7 @@ export default class Dashboard extends Component {
 
           </View>
 
-          <View style={styles.buffer}></View>
+          {/* <View style={styles.buffer}></View> */}
 
         </ScrollView>
       </ImageBackground>
@@ -188,63 +193,58 @@ export default class Dashboard extends Component {
   }
 }
 /* AppRegistry.registerComponent("Dashboard", () => Dashboard); */
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    width: "360rem",
     height: "100%",
-    backgroundColor: "rgba(0,0,0,0.2)",
-    borderRadius: 4,
-    borderWidth: 2,
+    // backgroundColor: "rgba(0,0,0,0.2)",
+    // borderRadius: 4,
+    // borderWidth: 2,
     // borderColor: "red"
   },
   mainPart: {
-      backgroundColor: "rgba(0,0,0,0.2)",
-      borderRadius: 2,
-      borderWidth: 2,
-      // height: "100%",
-      paddingTop: 20,
-      paddingLeft: 10,
-      paddingRight: 10,
-      borderColor: "black",
+    // backgroundColor: "rgba(0,0,0,0.2)",
+    // borderRadius: 2,
+    // borderWidth: 2,
+    // height: "100%",
+    paddingTop: "50rem",
+    paddingLeft: "20rem",
+    paddingRight: "20rem",
   },
   topPart: {
-    height: "40%",
-    marginBottom: 20,
-    borderColor: "red",
+    height: "150rem",
+    marginBottom: "40rem",
   },
   flexTop: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    margin: 10,
   },
   item: {
     backgroundColor: "rgba(0,0,0,0.6)",
-    height: "90%",
+    height: "100%",
     borderRadius: 10,
-    marginBottom: 20
   },
   temp: {
-    width: "25%",
+    width: "90rem",
   },
   tempText: {
-    fontSize: 30,
+    fontSize: "30rem",
     color: "rgb(255,255,255)"
   },
   statusBox: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: "40%",
-    marginBottom: 10
+    height: "150rem",
+    marginBottom: "40rem"
 
   },
   itemStatusBox: {
     justifyContent: "center",
     alignItems: "center",
-    margin: 10,
-    height: 140,
-    width: 140
+    height: "150rem",
+    width: "150rem"
   },
   icon: {
       height: "70%",
@@ -256,25 +256,28 @@ const styles = StyleSheet.create({
   actionBox: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: "40%",
-    marginBottom: 20
+    height: "150rem",
+    marginBottom: "30rem"
   },
   actionSort: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    margin: 10,
     marginTop: 0,
-    height: 140,
-    width: 140,
+    height: "150rem",
+    width: "150rem",
+  },
+  lightAction: {
+    width: "150rem",
+    marginBottom: "10rem",
   },
   itemActionBox: {
     justifyContent: "center",
     alignItems: "center",
-    height: 65,
-    width: 65
+    height: "70rem",
+    width: "70rem"
   },
   // buffer: {
-  //     height: 500
+  //     height: "200rem"
   // }
 });

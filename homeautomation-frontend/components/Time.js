@@ -1,20 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import moment from "moment";
 import keepAwake from "react-native-keep-awake";
+import EStyleSheet from "react-native-extended-stylesheet";
 
-const styles = StyleSheet.create({
-  time: {
-    justifyContent: "space-around"
-  },
-  timeText: {
-    fontSize: 30,
-    color: "rgb(255,255,255)"
-  },
-  dateText: {
-    color: "rgb(255,255,255)"
-  }
-});
+let entireScreenWidth = Dimensions.get('window').width;
+
+EStyleSheet.build({$rem: entireScreenWidth / 360});
 
 export default class Time extends Component {
   state = {
@@ -36,3 +28,17 @@ export default class Time extends Component {
     );
   }
 }
+
+
+const styles = EStyleSheet.create({
+  time: {
+    justifyContent: "space-around"
+  },
+  timeText: {
+    fontSize: "30rem",
+    color: "rgb(255,255,255)"
+  },
+  dateText: {
+    color: "rgb(255,255,255)"
+  }
+});

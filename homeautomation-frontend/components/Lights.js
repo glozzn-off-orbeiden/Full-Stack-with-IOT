@@ -6,14 +6,18 @@ import {
     Button, 
     Text,
     ImageBackground,
-    ScrollView
+    ScrollView, 
+    Dimensions 
         } from "react-native";
-// import { Card, Switch } from "react-native-ui-lib";
-import Icon from "react-native-vector-icons/Ionicons";
+import EStyleSheet from "react-native-extended-stylesheet";
 import FoundationIcon from "react-native-vector-icons/Foundation";
-import { Card } from "react-native-elements";
 import SortableGrid from "react-native-sortable-grid";
 import fetchStatus from "./api";
+
+let entireScreenWidth = Dimensions.get('window').width;
+
+EStyleSheet.build({$rem: entireScreenWidth / 360});
+
 
 const INITIAL_VALUE = 0;
 export default class Lights extends Component {
@@ -167,25 +171,25 @@ export default class Lights extends Component {
     }
 }
 /* AppRegistry.registerComponent("Dashboard", () => Dashboard); */
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         flex: 1,
         width: "100%",
         height: "100%",
-        backgroundColor: "rgba(0,0,0,0.2)",
-        borderRadius: 4,
-        borderWidth: 2,
+        // backgroundColor: "rgba(0,0,0,0.2)",
+        // borderRadius: 4,
+        // borderWidth: 2,
         // borderColor: "red"
     },
     mainPart: {
-        margin: 2,
-        backgroundColor: "rgba(0,0,0,0.2)",
-        borderRadius: 2,
-        borderWidth: 2,
+        // margin: 2,
+        // backgroundColor: "rgba(0,0,0,0.2)",
+        // borderRadius: 2,
+        // borderWidth: 2,
         // borderColor: "black",
-        paddingTop: 20,
-        paddingLeft: 10,
-        paddingRight: 10,
+        paddingTop: "40rem",
+        paddingLeft: "20rem",
+        paddingRight: "20rem",
     },
     item: {
         justifyContent: "center",
@@ -193,8 +197,8 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0,0,0,0.6)",
         height: "90%",
         borderRadius: 10,
-        margin: 10,
-        marginBottom: 20
+        margin: "10rem",
+        marginBottom: "20rem",
     },
     lightBulb: {
         height: "50%",
