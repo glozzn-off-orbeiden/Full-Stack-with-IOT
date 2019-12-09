@@ -1,3 +1,4 @@
+ 
 import React, { useEffect } from "react";
 import {
   StyleSheet,
@@ -7,6 +8,13 @@ import {
 import Dashboard from "./components/Dashboard";
 import Lights from "./components/Lights";
 import alertHandler from "./components/alerthandler"
+ 
+import { 
+    StyleSheet, 
+    ImageBackground,
+      } from "react-native";
+ 
+import Slider from "./components/Slider";
 
 export default function App() {
   useEffect(() => {
@@ -14,18 +22,14 @@ export default function App() {
   }, [])
 
   return (
-    <View style={styles.container}>
-
-      <Dashboard />
-      <Lights />
-    </View>
+      <Slider />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "lightblue",
-    alignItems: "center"
-  }
-});
+// const styles = EStyleSheet.create({
+//   container: {
+//     flex: 1,
+//     width: "100%",
+//     height: "100%",
+//   }
+// });

@@ -24,11 +24,11 @@ async function fetchstatus(req, res, next) {
           return next(createError(500, err.message));
         }
         if (Status !== null) {
-          console.log(Status);
+          //console.log(Status);
           data = { ...data, Lights: "on" };
         } else {
           data = { ...data, Lights: "off" };
-          console.log(Status);
+          //console.log(Status);
         }
       }
     );
@@ -48,7 +48,7 @@ async function fetchstatus(req, res, next) {
         }
 
         if (Status !== null) {
-          console.log(Status);
+          //console.log(Status);
           data = { ...data, Doors: "open" };
         } else {
           data = { ...data, Doors: "closed" };
@@ -71,7 +71,7 @@ async function fetchstatus(req, res, next) {
         }
 
         if (Status !== null) {
-          console.log(Status);
+          //console.log(Status);
           data = { ...data, Windows: "open" };
         } else {
           data = { ...data, Windows: "closed" };

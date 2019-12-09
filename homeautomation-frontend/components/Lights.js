@@ -6,92 +6,54 @@ import {
     Button, 
     Text,
     ImageBackground,
-    ScrollView
+    ScrollView, 
+    Dimensions 
         } from "react-native";
-// import { Card, Switch } from "react-native-ui-lib";
-import Icon from "react-native-vector-icons/Ionicons";
+import EStyleSheet from "react-native-extended-stylesheet";
 import FoundationIcon from "react-native-vector-icons/Foundation";
-import { Card } from "react-native-elements";
 import SortableGrid from "react-native-sortable-grid";
-import fetchStatus from "./api";
+import {fetchLights} from "./api";
+import alertHandler from './alerthandler';
+
+let entireScreenWidth = Dimensions.get('window').width;
+
+EStyleSheet.build({$rem: entireScreenWidth / 360});
+
 
 const INITIAL_VALUE = 0;
 export default class Lights extends Component {
     state = {
         lights: [
-            {
-                light_name: "numberOne",
-                status: "on",
-                id: 12641
-            },
-            {
-                light_name: "numberTwo",
-                status: "off",
-                id: 12362
-            },
-            {
-                light_name: "numberThree",
-                status: "disconnect",
-                id: 16433
-            },
-            {
-                light_name: "numberFour",
-                status: "disconnect",
-                id: 8634
-            },{
-                light_name: "numberFive",
-                status: "on",
-                id: 835675
-            },
-            {
-                light_name: "numberSix",
-                status: "on",
-                id: 6368900
-            },
-            {
-                light_name: "numberSeven",
-                status: "disconnect",
-                id: 846537
-            },{
-                light_name: "numberEight",
-                status: "off",
-                id: 36898
-            },
-            {
-                light_name: "numberNine",
-                status: "off",
-                id: 62792
-            },
-            {
-                light_name: "numberTen",
-                status: "disconnect",
-                id: 24573
-            }
+           {
+               Name:"Empty",
+               Status:"on"
+           },
+           {
+            Name:"Empty",
+            Status:"disconnect"
+        },
         ]
     };
+    fetchData = async () => {
+        try {
+          const data = await fetchLights();
+          console.log("promise?", data);
+    
+          this.setState({
+            lights: data.Lights
+          });
+        } catch (err) {
+          () => {
+            console.log(err)
+          }
+        }
+      }
 
+    componentDidMount() {
 
-  /* componentDidMount() {
-    this.socket.on("alert", function(data) {
-      Alert.alert("Alert Title", "My Alert Msg");
-    });
-  } */
-//   async componentDidMount() {
-//     const data = await fetchStatus();
-//     console.log("promise?", data);
-
-//     this.setState({
-//       Lights: data.Lights,
-//       currentTemp: data.currentTemp,
-//       Doors: data.Doors,
-//       Windows: data.Windows
-//     });
-//   }
-
-//   onSliderValueChange = value => {
-//     this.setState({ sliderValue: value });
-//   };
-
+        this.fetchData()
+        alertHandler()
+      }
     render() {
         console.log("lights rendering");
         return (
@@ -105,9 +67,8 @@ export default class Lights extends Component {
                         itemsPerRow                  = { 2 }
                         onDragRelease                = { (itemOrder) => console.log("Drag was released, the blocks are in the following order: ", itemOrder) }
                         onDragStart                  = { ()          => console.log("Some block is being dragged now!") } >
-
-                        {
-                            this.state.lights.filter(light => (light.status === "off") || (light.status === "on")).map( (letter, index) =>
+{          
+                            this.state.lights.filter(light => (light.Status === "off") || (light.Status === "on")).map( (letter, index) =>
 
                                 <View key={index} style={styles.item}>
                                     <View
@@ -120,10 +81,11 @@ export default class Lights extends Component {
                                             color="rgb(255,255,255)"
                                         />
                                     </View>
-                                    <Text style={[styles.lightText, ]}>{letter.light_name}</Text>
+                                    <Text style={[styles.lightText, ]}>{letter.Name}</Text>
                                 </View>
                             )
                         }
+                    }
                     </SortableGrid>
                                        
                     <SortableGrid
@@ -135,7 +97,7 @@ export default class Lights extends Component {
                         onDragStart                  = { ()          => console.log("Some block is being dragged now!") } >
 
                         {
-                            this.state.lights.filter(light => light.status === "disconnect").map( (letter, index) =>
+                            this.state.lights&&this.state.lights.filter(light => light.Status === "disconnect").map( (letter, index) =>
 
                                 <View key={index} style={styles.item} onTap={() => console.log("Item number:", index, "was tapped!") }>
                                     <View style={styles.lightBulb}>
@@ -146,7 +108,7 @@ export default class Lights extends Component {
                                             onPress={() => console.log("hello")}
                                         />
                                     </View>
-                                    <Text style={ styles.lightText }>{letter.light_name}</Text>
+                                    <Text style={ styles.lightText }>{letter.Name}</Text>
                                 </View>
                             )
                         }
@@ -167,25 +129,25 @@ export default class Lights extends Component {
     }
 }
 /* AppRegistry.registerComponent("Dashboard", () => Dashboard); */
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         flex: 1,
         width: "100%",
         height: "100%",
-        backgroundColor: "rgba(0,0,0,0.2)",
-        borderRadius: 4,
-        borderWidth: 2,
+        // backgroundColor: "rgba(0,0,0,0.2)",
+        // borderRadius: 4,
+        // borderWidth: 2,
         // borderColor: "red"
     },
     mainPart: {
-        margin: 2,
-        backgroundColor: "rgba(0,0,0,0.2)",
-        borderRadius: 2,
-        borderWidth: 2,
+        // margin: 2,
+        // backgroundColor: "rgba(0,0,0,0.2)",
+        // borderRadius: 2,
+        // borderWidth: 2,
         // borderColor: "black",
-        paddingTop: 20,
-        paddingLeft: 10,
-        paddingRight: 10,
+        paddingTop: "40rem",
+        paddingLeft: "20rem",
+        paddingRight: "20rem",
     },
     item: {
         justifyContent: "center",
@@ -193,8 +155,8 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0,0,0,0.6)",
         height: "90%",
         borderRadius: 10,
-        margin: 10,
-        marginBottom: 20
+        margin: "10rem",
+        marginBottom: "20rem",
     },
     lightBulb: {
         height: "50%",
