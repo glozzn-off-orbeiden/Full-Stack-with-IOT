@@ -25,13 +25,16 @@ export default class Slider extends Component {
             <Swiper 
               style={StyleSheet.wrapper} 
               loop={false}
-
               // showsButtons={true}
+
                 >
                 <View style={styles.slide1}>
                     <Dashboard />
                 </View>
                 <View style={styles.slide2}>
+                  <Text>Temp</Text>
+                </View>
+                <View style={styles.slide3}>
                     <Lights />
                 </View>
 
@@ -52,11 +55,11 @@ const styles = EStyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: "rgb(0,122,255)",
     },
     slide3: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#92BB',
     }
   })
