@@ -242,6 +242,8 @@ const styles = EStyleSheet.create({
         position: "absolute",
         height: "20rem",
         width: "100%",
+        fontSize: "16rem",
+        paddingTop: "2rem",
         textAlign: "center",
         top: "65rem",
         zIndex: 1,
