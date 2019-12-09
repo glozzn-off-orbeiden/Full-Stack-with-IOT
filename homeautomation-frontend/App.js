@@ -1,12 +1,18 @@
-import React from "react";
-import { 
-    StyleSheet, 
-    Text, 
-    View } from "react-native";
+import React, { useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View
+} from "react-native";
 import Dashboard from "./components/Dashboard";
 import Lights from "./components/Lights";
+import alertHandler from "./components/alerthandler"
 
 export default function App() {
+  useEffect(() => {
+    alertHandler()
+  }, [])
+
   return (
     <View style={styles.container}>
 

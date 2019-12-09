@@ -52,7 +52,7 @@ export default class Dashboard extends Component {
   componentDidMount() {
 
     this.fetchData()
-    alertHandler()
+
   }
 
 
