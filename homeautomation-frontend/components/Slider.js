@@ -40,6 +40,7 @@ export default class Slider extends Component {
                 </View> */}
        <View  style={styles.slide3}>
                   <AddDevice/>
+      </View>
       </Swiper>
     );
   }
