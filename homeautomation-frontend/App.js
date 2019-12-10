@@ -1,29 +1,16 @@
- 
 import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View
-} from "react-native";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import Dashboard from "./components/Dashboard";
 import Lights from "./components/Lights";
-import alertHandler from "./components/alerthandler"
- 
-import { 
-    StyleSheet, 
-    ImageBackground,
-      } from "react-native";
- 
+import alertHandler from "./components/alerthandler";
 import Slider from "./components/Slider";
 
 export default function App() {
   useEffect(() => {
-    alertHandler()
-  }, [])
+    alertHandler();
+  }, []);
 
-  return (
-      <Slider />
-  );
+  return <Slider />;
 }
 
 // const styles = EStyleSheet.create({

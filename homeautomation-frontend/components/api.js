@@ -1,5 +1,5 @@
-import { url } from '../config.js';
 
+import { url } from '../config.js';
 console.log(url);
 
 async function fetchStatus() {
@@ -45,11 +45,16 @@ async function fetchLights() {
     () => console.log("on showing error");
   }
 }
+//temperature fetching, 
+async function fetchTemperature() {
+  try {
+    const res = await fetch(url + "/temp");
+    const data = await res.json();
+    console.log("promise?", data);
 
+ 
 async function createLight(data) {
-
   let body = { ...data }
-
 
   const option = {
     method: "PUT",
@@ -70,5 +75,41 @@ async function createLight(data) {
     () => console.log("on showing error");
   }
 }
+    return data;
+  } catch (err) {
+    () => {
+      console.log(err);
+    };
+  }
+}
+export { fetchStatus, fetchLights, fetchTemperature, createLight };
 
-export { fetchStatus, fetchLights, createLight };
+/* async function fetchTemperature() {
+  const option = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+fetchTemperature = async () => {
+        try {
+          const data = await fetchTemperature();
+          console.log("promise?", data);
+          this.setState({
+            currentTemp: data.currentTemp
+            /* lights: data.Lights 
+          });
+        } catch (err) {
+          () => {
+            console.log(err)
+          }
+        }
+      componentDidMount() {
+        this.fetchTemperature()
+      };
+    }
+  }
+ */
+//console.log("hello");
+
+ 
