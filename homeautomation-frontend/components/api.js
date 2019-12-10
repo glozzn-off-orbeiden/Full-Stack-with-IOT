@@ -1,8 +1,8 @@
- import {url} from'../config.js';
+import { url } from '../config.js';
 
 console.log(url);
 
- async function fetchStatus() {
+async function fetchStatus() {
   const option = {
     method: "GET",
     headers: {
@@ -14,7 +14,7 @@ console.log(url);
   try {
     //console.log("hello2");
 
-    let res = await fetch(url+"/status", option);
+    let res = await fetch(url + "/status", option);
     let data = await res.json();
     //console.log("api call", data);
 
@@ -24,7 +24,7 @@ console.log(url);
   }
 }
 
- async function fetchLights() {
+async function fetchLights() {
   const option = {
     method: "GET",
     headers: {
@@ -36,7 +36,7 @@ console.log(url);
   try {
     //console.log("hello2");
 
-    let res = await fetch(url+"/lights", option);
+    let res = await fetch(url + "/lights", option);
     let data = await res.json();
     //console.log("api call", data);
 
@@ -46,6 +46,29 @@ console.log(url);
   }
 }
 
+async function createLight(data) {
+
+  let body = { ...data }
 
 
-export {fetchStatus,fetchLights};
+  const option = {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  try {
+    //console.log("hello2");
+
+    let res = await fetch(url + "/lights/", option);
+    let data = await res.json();
+    console.log("api call", data);
+
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
+
+export { fetchStatus, fetchLights, createLight };
