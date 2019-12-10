@@ -51,6 +51,13 @@ async function fetchTemperature() {
     const res = await fetch(url + "/temp");
     const data = await res.json();
     console.log("promise?", data);
+    return data;
+  } catch (err) {
+    () => {
+      console.log(err);
+    };
+  }
+}
 
  
 async function createLight(data) {
@@ -75,13 +82,7 @@ async function createLight(data) {
     () => console.log("on showing error");
   }
 }
-    return data;
-  } catch (err) {
-    () => {
-      console.log(err);
-    };
-  }
-}
+
 export { fetchStatus, fetchLights, fetchTemperature, createLight };
 
 /* async function fetchTemperature() {
