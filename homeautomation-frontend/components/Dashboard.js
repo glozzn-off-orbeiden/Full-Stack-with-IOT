@@ -9,7 +9,7 @@ import {
     ScrollView, 
     Dimensions 
   } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import MoonIcon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import KeyIcon from "react-native-vector-icons/FontAwesome5";
@@ -27,7 +27,7 @@ EStyleSheet.build({$rem: entireScreenWidth / 360});
 const INITIAL_VALUE = 0;
 export default class Dashboard extends Component {
   state = {
-    Lights: "off",
+    Lights: "on",
     currentTemp: 34,
     Doors: "open",
     Windows: "open",
@@ -121,7 +121,7 @@ export default class Dashboard extends Component {
 
               <View style={[styles.item, styles.itemActionBox, styles.lightAction]}>
                 <View
-                    style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                    style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgba(91, 194, 54, 0.9)":"rgba(255,255,255,0.5)"}]}>
 
                     <FoundationIcon
                         style={{fontSize: 30}} 
@@ -150,7 +150,7 @@ export default class Dashboard extends Component {
               <View style={[styles.item, styles.itemActionBox]}>
                 <View
                   style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
-                  <Icon
+                  <MoonIcon
                     style={{ fontSize: 35 }}
                     name="ios-moon"
                     color="rgb(255,255,255)"
