@@ -1,5 +1,5 @@
-import { url } from "../config.js";
 
+import { url } from '../config.js';
 console.log(url);
 
 async function fetchStatus() {
@@ -45,13 +45,36 @@ async function fetchLights() {
     () => console.log("on showing error");
   }
 }
-//temperature fetching
+//temperature fetching, 
 async function fetchTemperature() {
   try {
     const res = await fetch(url + "/temp");
     const data = await res.json();
     console.log("promise?", data);
 
+ 
+async function createLight(data) {
+  let body = { ...data }
+
+  const option = {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  try {
+    //console.log("hello2");
+
+    let res = await fetch(url + "/lights/", option);
+    let data = await res.json();
+    console.log("api call", data);
+
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
     return data;
   } catch (err) {
     () => {
@@ -59,6 +82,7 @@ async function fetchTemperature() {
     };
   }
 }
+export { fetchStatus, fetchLights, fetchTemperature, createLight };
 
 /* async function fetchTemperature() {
   const option = {
@@ -88,4 +112,4 @@ fetchTemperature = async () => {
  */
 //console.log("hello");
 
-export { fetchStatus, fetchLights, fetchTemperature };
+ 
