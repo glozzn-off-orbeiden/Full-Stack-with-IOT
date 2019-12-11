@@ -14,14 +14,13 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Swiper from "react-native-swiper";
 import Dashboard from "./Dashboard";
 import Lights from "./Lights";
-import AddDevice from './AddDevice'
+import AddDevice from "./AddDevice";
 
 let entireScreenWidth = Dimensions.get("window").width;
 
 EStyleSheet.build({ $rem: entireScreenWidth / 360 });
 
 export default class Slider extends Component {
-
   render() {
     return (
       <Swiper
@@ -35,12 +34,12 @@ export default class Slider extends Component {
         <View style={styles.slide2}>
           <Text>Temp</Text>
         </View>
-      {/* <View style={styles.slide3}>
-                    <Lights />
-                </View> */}
-       <View  style={styles.slide3}>
-                  <AddDevice/>
-      </View>
+        {/* <View style={styles.slide3}>
+          <Lights />
+        </View> */}
+        <View style={styles.slide3}>
+          <AddDevice />
+        </View>
       </Swiper>
     );
   }
