@@ -58,7 +58,7 @@ export default class Lights extends Component {
                 Status:"on"
             },
             {
-                Name:"Storage room",
+                Name:"Dungeon",
                 Status:"disconnect"
             },
         ]
