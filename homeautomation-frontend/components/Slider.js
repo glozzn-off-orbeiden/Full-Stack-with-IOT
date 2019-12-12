@@ -40,9 +40,6 @@ export default class Slider extends Component {
           <Lights />
         </View>
         <View style={styles.slide3}>
-          <Lights />
-        </View> 
-        <View style={styles.slide3}>
           <AddDevice />
         </View>
       </Swiper>
@@ -64,6 +61,11 @@ const styles = EStyleSheet.create({
     backgroundColor: "rgb(0,122,255)"
   },
   slide3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  slide4: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
