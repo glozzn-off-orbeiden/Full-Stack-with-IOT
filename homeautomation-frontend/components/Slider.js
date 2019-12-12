@@ -14,6 +14,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Swiper from "react-native-swiper";
 import Dashboard from "./Dashboard";
 import Lights from "./Lights";
+import Temp from "./Temp";
 import AddDevice from './AddDevice'
 
 let entireScreenWidth = Dimensions.get("window").width;
@@ -33,7 +34,10 @@ export default class Slider extends Component {
           <Dashboard />
         </View>
         <View style={styles.slide2}>
-          <Text>Temp</Text>
+          <Temp />
+        </View>
+        <View style={styles.slide3}>
+          <Lights />
         </View>
       {/* <View style={styles.slide3}>
                     <Lights />
