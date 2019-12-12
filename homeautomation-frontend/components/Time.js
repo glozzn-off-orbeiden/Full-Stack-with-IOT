@@ -35,7 +35,7 @@ const styles = EStyleSheet.create({
     justifyContent: "space-around"
   },
   timeText: {
-    fontSize: "30rem",
+    fontSize: "25rem",
     color: "rgb(255,255,255)"
   },
   dateText: {
