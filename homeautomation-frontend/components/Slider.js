@@ -61,7 +61,6 @@ const styles = EStyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgb(0,122,255)"
   },
   slide3: {
     flex: 1,
