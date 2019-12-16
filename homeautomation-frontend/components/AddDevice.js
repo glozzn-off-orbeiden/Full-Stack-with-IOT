@@ -68,11 +68,12 @@ export default function Temp() {
 
     return (
         <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
-            <ScrollView style={styles.mainPart}>
+            <KeyboardAvoidingView 
+                    behavior="padding"
+                    style={styles.keyboardAvoid}>
+                
+                <ScrollView style={styles.mainPart}>
 
-                <KeyboardAvoidingView 
-                        behavior="padding">
-                    
                     <View style={styles.headerWrapper}>
                         <View style={styles.headerBorder}>
                             <Text style={styles.header}>Add Device</Text>
@@ -140,11 +141,9 @@ export default function Temp() {
 
                         </View>
                     </View>
-                    
-                </KeyboardAvoidingView>
-                
 
-            </ScrollView>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </ImageBackground>
     )
 }
@@ -154,6 +153,10 @@ const styles = EStyleSheet.create({
         flex: 1,
         width: "360rem",
         height: "100%",
+    },
+    keyboardAvoid: {
+        flex: 1,
+        justifyContent: "flex-end"
     },
     mainPart: {
         paddingTop: "50rem",
