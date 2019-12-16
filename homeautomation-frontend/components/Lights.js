@@ -63,6 +63,15 @@ export default class Lights extends Component {
             },
         ]
     };
+
+    // activateLight = (light) => {
+        
+    //     if(light.Status === "off") {
+    //         this.setState()
+    // } else {
+
+    // }
+
     fetchData = async () => {
         try {
           const data = await fetchLights();
@@ -155,17 +164,6 @@ export default class Lights extends Component {
 
                     <View style={styles.lightsBox}>
                         {lightsContent}
-                    </View>
-                        
-                    <View style={styles.buttonWrapper}>
-                        <View style={styles.plusButton}>
-                            <PlusIcon
-                                name="plus"
-                                style={ {fontSize: 40} }
-                                onPress={() => console.log("trying to add a light")}
-                                color="rgb(255,255,255)"
-                                />
-                        </View>
                     </View>
                             
                     <View style={styles.buffer}></View>
