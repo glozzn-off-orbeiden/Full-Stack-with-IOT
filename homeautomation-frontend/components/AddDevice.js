@@ -7,7 +7,8 @@ import {
     ImageBackground, 
     Dimensions, 
     TextInput, 
-    TouchableOpacity, 
+    TouchableOpacity,
+    KeyboardAvoidingView, 
 } from 'react-native';
 import ModalDropdown from "react-native-modal-dropdown";
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -68,74 +69,79 @@ export default function Temp() {
     return (
         <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
             <ScrollView style={styles.mainPart}>
+
+                <KeyboardAvoidingView 
+                        behavior="padding">
                     
-                <View style={styles.headerWrapper}>
-                    <View style={styles.headerBorder}>
-                        <Text style={styles.header}>Add Device</Text>
-                    </View>    
+                    <View style={styles.headerWrapper}>
+                        <View style={styles.headerBorder}>
+                            <Text style={styles.header}>Add Device</Text>
+                        </View>    
 
-                </View>
+                    </View>
 
-                <View style={styles.inputWrapper}>
+                    <View style={styles.inputWrapper}>
 
-                    <ModalDropdown
-                        style={styles.dropDownBox}
-                        textStyle={styles.dropDownBoxText}
-                        dropdownStyle={styles.dropDown}
-                        dropdownTextStyle={styles.dropDownText}
-                        options={options}
-                        defaultValue={Device}
-                        onSelect={(index, value) => {
-                            setDevice(value);
-                            console.log(value);
-                        }}
-                        />                       
+                        <ModalDropdown
+                            style={styles.dropDownBox}
+                            textStyle={styles.dropDownBoxText}
+                            dropdownStyle={styles.dropDown}
+                            dropdownTextStyle={styles.dropDownText}
+                            options={options}
+                            defaultValue={Device}
+                            onSelect={(index, value) => {
+                                setDevice(value);
+                                console.log(value);
+                            }}
+                            />                       
 
-                    <View>
+                        <View>
 
-                        <TextInput
-                            placeholder="Room"
+                            <TextInput
+                                placeholder="Room"
+                                style={styles.textInput}
+                                value={value}
+                                maxLength={15}
+                                onChangeText={text => onChangeText(text)}
+                                />
+
+                        </View>
+
+                        <View >
+
+                            <TextInput
+                            placeholder="Description"
                             style={styles.textInput}
-                            value={value}
+                            value={value2}
                             maxLength={15}
-                            onChangeText={text => onChangeText(text)}
+                            onChangeText={text => onChangeText2(text)}
                             />
 
+                        </View>
+
+                        <View style={styles.buttonWrapper}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    submitHandler(Device)
+                                    setDevice("Select Device")
+                                    onChangeText(null)
+                                    onChangeText2(null)
+                                    console.log("submit");
+                                }}>
+
+                                <View style={styles.submit}>
+                                    <PlusIcon
+                                        name="plus"
+                                        style={styles.plusIcon}
+                                        color="rgb(255,255,255)"
+                                        />
+                                </View>
+                            </TouchableOpacity>
+
+                        </View>
                     </View>
-
-                    <View >
-
-                        <TextInput
-                        placeholder="Description"
-                        style={styles.textInput}
-                        value={value2}
-                        maxLength={15}
-                        onChangeText={text => onChangeText2(text)}
-                        />
-
-                    </View>
-
-                    <View style={styles.buttonWrapper}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                submitHandler(Device)
-                                setDevice("Select Device")
-                                onChangeText(null)
-                                onChangeText2(null)
-                                console.log("submit");
-                            }}>
-
-                            <View style={styles.submit}>
-                                <PlusIcon
-                                    name="plus"
-                                    style={styles.plusIcon}
-                                    color="rgb(255,255,255)"
-                                    />
-                            </View>
-                        </TouchableOpacity>
-
-                    </View>
-                </View>
+                    
+                </KeyboardAvoidingView>
                 
 
             </ScrollView>
