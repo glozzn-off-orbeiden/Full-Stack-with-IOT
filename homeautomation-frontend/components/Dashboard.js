@@ -1,28 +1,31 @@
 import React, { Component } from "react";
- 
-import { 
-    StyleSheet, 
-    View, 
-    Button, 
-    Text,
-    ImageBackground,
-    ScrollView, 
-    Dimensions 
-  } from "react-native";
+
+import {
+  Alert,
+  StyleSheet,
+  View,
+  Button,
+  Text,
+  ImageBackground,
+  ScrollView,
+  Dimensions
+} from "react-native";
 import MoonIcon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import KeyIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
 import Time from "./Time";
-import {fetchStatus} from "./api";
-import alertHandler from "./alerthandler";
+import { fetchStatus } from "./api";
+import { alertHandler } from "./alerthandler";
 import EStyleSheet from "react-native-extended-stylesheet";
+//import subscribeUnsubscribe from "./subscribeUnsubscribe";
+/* import socket from "socket.io-client";
+const io = socket(/* { forceNew: true } ); */
 
-let entireScreenWidth = Dimensions.get('window').width;
+let entireScreenWidth = Dimensions.get("window").width;
 
-EStyleSheet.build({$rem: entireScreenWidth / 360});
-
+EStyleSheet.build({ $rem: entireScreenWidth / 360 });
 
 const INITIAL_VALUE = 0;
 export default class Dashboard extends Component {
@@ -31,7 +34,8 @@ export default class Dashboard extends Component {
     currentTemp: 34,
     Doors: "open",
     Windows: "open",
-    MainDoor: "locked"
+    MainDoor: "locked",
+    toggle: false
   };
 
   fetchData = async () => {
@@ -47,25 +51,38 @@ export default class Dashboard extends Component {
       });
     } catch (err) {
       () => {
-        console.log(err)
-      }
+        console.log(err);
+      };
     }
-  }
+  };
 
   componentDidMount() {
-
-    this.fetchData()
-
+    this.fetchData();
   }
+  doNotDisturb = () => {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  };
 
+  toggleIoSubscription = () => {
+    if (this.state.toggle == true) {
+      /* io.connect(); */
+      Alert.alert("Do not disturb mode is off.");
+    } else {
+      /* io.off(); */
+      Alert.alert("Do not disturb mode is on.");
+    }
+  };
 
- render() {
+  render() {
     //console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
-      <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
-
+      <ImageBackground
+        source={require("../assets/raindrop.jpg")}
+        style={styles.container}
+      >
         <ScrollView style={styles.mainPart}>
-
           {/* <Card style={styles.topPart}>
             <View style={{ width: "50%" }}>
               <Time />
@@ -76,39 +93,56 @@ export default class Dashboard extends Component {
             </View>
           </Card> */}
           <View style={styles.topPart}>
-
             <View key="topPart" style={[styles.item, styles.flexTop]}>
-               
-                <View style={{ width: "50%" }}>
-                  <Time />
-                </View>
-                <View style={styles.temp}>
-                  <Text style={styles.tempText}>{this.state.currentTemp}&#8451;</Text>
-                </View>
+              <View style={{ width: "50%" }}>
+                <Time />
+              </View>
+              <View style={styles.temp}>
+                <Text style={styles.tempText}>
+                  {this.state.currentTemp}&#8451;
+                </Text>
+              </View>
             </View>
-                  
           </View>
 
           <View style={styles.statusBox}>
-
             <View style={[styles.item, styles.itemStatusBox]}>
-              <View 
-                style={[styles.icon, {backgroundColor: this.state.Doors === "open" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+              <View
+                style={[
+                  styles.icon,
+                  {
+                    backgroundColor:
+                      this.state.Doors === "open"
+                        ? "rgb(0,122,255)"
+                        : "rgba(255,255,255,0.5)"
+                  }
+                ]}
+              >
                 <DoorIcon
-                  style={{fontSize: 30}} 
+                  style={{ fontSize: 30 }}
                   onPress={() => console.log("Door")}
-                  name={this.state.Doors == "open" ? "door-open" : "door-closed"}
+                  name={
+                    this.state.Doors == "open" ? "door-open" : "door-closed"
+                  }
                   color="rgb(255,255,255)"
                 />
               </View>
             </View>
 
-
             <View style={[styles.item, styles.itemStatusBox]}>
               <View
-                style={[styles.icon, {backgroundColor: this.state.Windows === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                style={[
+                  styles.icon,
+                  {
+                    backgroundColor:
+                      this.state.Windows === "on"
+                        ? "rgb(0,122,255)"
+                        : "rgba(255,255,255,0.5)"
+                  }
+                ]}
+              >
                 <WindowIcon
-                  style={{fontSize: 40}} 
+                  style={{ fontSize: 40 }}
                   onPress={() => console.log("Window")}
                   name={this.state.Windows == "open" ? "windowso" : "windows"}
                   color="rgb(255,255,255)"
@@ -118,41 +152,44 @@ export default class Dashboard extends Component {
           </View>
           <View style={styles.actionBox}>
             <View style={styles.actionSort}>
-
-              <View style={[styles.item, styles.itemActionBox, styles.lightAction]}>
+              <View
+                style={[styles.item, styles.itemActionBox, styles.lightAction]}
+              >
                 <View
-                    style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgba(91, 194, 54, 0.9)":"rgba(255,255,255,0.5)"}]}>
-
-                    <FoundationIcon
-                        style={{fontSize: 30}} 
-                        onPress={() => console.log("lights")}
-                        name="lightbulb"
-                        color="rgb(255,255,255)"
-                    />
-
+                  style={[
+                    styles.icon,
+                    {
+                      backgroundColor:
+                        this.state.Lights === "on"
+                          ? "rgba(91, 194, 54, 0.9)"
+                          : "rgba(255,255,255,0.5)"
+                    }
+                  ]}
+                >
+                  <FoundationIcon
+                    style={{ fontSize: 30 }}
+                    onPress={() => console.log("lights")}
+                    name="lightbulb"
+                    color="rgb(255,255,255)"
+                  />
                 </View>
               </View>
 
               <View style={[styles.item, styles.itemActionBox]}>
                 <View
-                  style={[styles.icon, {backgroundColor: this.state.MainDoor === "unlocked" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                  style={[
+                    styles.icon,
+                    {
+                      backgroundColor:
+                        this.state.MainDoor === "unlocked"
+                          ? "rgb(0,122,255)"
+                          : "rgba(255,255,255,0.5)"
+                    }
+                  ]}
+                >
                   <KeyIcon
-                      style={{ fontSize: 25 }}
-                      name="key"
-                      color="rgb(255,255,255)"
-                      onPress={() => {
-                        alert("You tapped the button!");
-                      }}
-                    />
-                </View>
-              </View>
-
-              <View style={[styles.item, styles.itemActionBox]}>
-                <View
-                  style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
-                  <MoonIcon
-                    style={{ fontSize: 35 }}
-                    name="ios-moon"
+                    style={{ fontSize: 25 }}
+                    name="key"
                     color="rgb(255,255,255)"
                     onPress={() => {
                       alert("You tapped the button!");
@@ -161,16 +198,43 @@ export default class Dashboard extends Component {
                 </View>
               </View>
 
+              <View style={[styles.item, styles.itemActionBox]}>
+                <View
+                  style={[
+                    styles.icon,
+                    {
+                      backgroundColor:
+                        this.state.Lights === "on"
+                          ? "rgb(0,122,255)"
+                          : "rgba(255,255,255,0.5)"
+                    }
+                  ]}
+                >
+                  <MoonIcon
+                    style={{ fontSize: 35 }}
+                    name="ios-moon"
+                    color="rgb(255,255,255)"
+                    /* color="white" */
+                    /* onPress={() => {
+                      const newState = !this.state.toggle;
+                      this.setState({
+                        toggle: newState
+                      });
+                      alert("the button is tapped!");
+                    }} */
+                    onPress={this.toggleIoSubscription}
+                  />
+                  {/* <Text style={{ marginBottom: 2, color: "orange" }}>
+                    {textAppear}
+                  </Text> */}
+                </View>
+              </View>
             </View>
 
-
-            <View style={styles.actionSort}>
-            </View>
-
+            <View style={styles.actionSort}></View>
           </View>
 
           {/* <View style={styles.buffer}></View> */}
-
         </ScrollView>
       </ImageBackground>
     );
@@ -181,7 +245,7 @@ const styles = EStyleSheet.create({
   container: {
     flex: 1,
     width: "360rem",
-    height: "100%",
+    height: "100%"
     // backgroundColor: "rgba(0,0,0,0.2)",
     // borderRadius: 4,
     // borderWidth: 2,
@@ -194,24 +258,24 @@ const styles = EStyleSheet.create({
     // height: "100%",
     paddingTop: "50rem",
     paddingLeft: "20rem",
-    paddingRight: "20rem",
+    paddingRight: "20rem"
   },
   topPart: {
     height: "150rem",
-    marginBottom: "40rem",
+    marginBottom: "40rem"
   },
   flexTop: {
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
+    alignItems: "center"
   },
   item: {
     backgroundColor: "rgba(0,0,0,0.6)",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: 10
   },
   temp: {
-    width: "90rem",
+    width: "90rem"
   },
   tempText: {
     fontSize: "30rem",
@@ -222,7 +286,6 @@ const styles = EStyleSheet.create({
     justifyContent: "space-between",
     height: "150rem",
     marginBottom: "40rem"
-
   },
   itemStatusBox: {
     justifyContent: "center",
@@ -231,11 +294,11 @@ const styles = EStyleSheet.create({
     width: "150rem"
   },
   icon: {
-      height: "70%",
-      width: "70%",
-      justifyContent: "center",
-      alignItems: "center",
-      borderRadius: 50,
+    height: "70%",
+    width: "70%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50
   },
   actionBox: {
     flexDirection: "row",
@@ -249,18 +312,18 @@ const styles = EStyleSheet.create({
     justifyContent: "space-between",
     marginTop: 0,
     height: "150rem",
-    width: "150rem",
+    width: "150rem"
   },
   lightAction: {
     width: "150rem",
-    marginBottom: "10rem",
+    marginBottom: "10rem"
   },
   itemActionBox: {
     justifyContent: "center",
     alignItems: "center",
     height: "70rem",
     width: "70rem"
-  },
+  }
   // buffer: {
   //     height: "200rem"
   // }

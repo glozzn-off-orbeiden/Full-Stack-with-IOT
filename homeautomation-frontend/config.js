@@ -1,3 +1,2 @@
-
-const id = "2bcdcfd1";
+const id = "6ed7f8a8";
 export const url = `https://${id}.ngrok.io`;
