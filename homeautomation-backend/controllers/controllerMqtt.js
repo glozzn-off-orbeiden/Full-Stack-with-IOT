@@ -29,7 +29,7 @@ async function updateTemp(token, message) {
     }
 
 };
-async function statusUpdate(token, message) {
+async function statusUpdate(token, message, sockets) {
 
     let deviceCategory = token.substring(0, token.indexOf("/"))
 
@@ -40,23 +40,25 @@ async function statusUpdate(token, message) {
     }
 
     let parameter = token.substring(startSubstring, stopSubstring);
-    let searchParameter = `${deviceCategory}`;
+    let searchParameter = `${deviceCategory}.Token`;
+    let updatedParameter = `${deviceCategory}.$.Status`;
     console.log(searchParameter);
+    console.log(token);
+    
     try {
         
-        Status.findOne({searchParameter:{Token:token}}).exec(function (err,doc) {
+        Status.updateOne({[searchParameter]:token},  {[updatedParameter]:message} ,{new:true, upsert:true}).exec(function (err,doc) {
             console.log(doc);
-            
+            if(doc.nModified === 1 && doc.n === 1){
+            sockets.emit("statusChange", {Token: token,
+            Status: message})
+            }
         })
-
-
     } catch (error) {
         console.log(error);
         
     }
 }
-
-
 
 
 
