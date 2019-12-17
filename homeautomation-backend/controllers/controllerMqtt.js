@@ -41,17 +41,17 @@ async function statusUpdate(token, message, sockets) {
 
     let parameter = token.substring(startSubstring, stopSubstring);
     let searchParameter = `${deviceCategory}.Token`;
-    let updadteParmeter = `${deviceCategory}.$.Status`;
+    let updatedParameter = `${deviceCategory}.$.Status`;
     console.log(searchParameter);
     console.log(token);
     
     try {
         
-        Status.updateOne({[searchParameter]:token},  { [updadteParmeter]:message} ,{new:true, upsert:true}, function (err,doc) {
+        Status.updateOne({[searchParameter]:token},  {[updatedParameter]:message} ,{new:true, upsert:true}).exec(function (err,doc) {
             console.log(doc);
             if(doc.nModified === 1 && doc.n === 1){
-            sockets.emit("alert", {title: "light",
-            message: "Someone switched the light!"})
+            sockets.emit("statusChange", {Token: token,
+            Status: message})
             }
         })
     } catch (error) {
