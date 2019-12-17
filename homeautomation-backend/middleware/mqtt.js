@@ -39,7 +39,7 @@ module.exports.sockets = function (sockets) {
 
       case "Light":
       case "Window":
-      case "Door": statusUpdate(topic, message)
+      case "Door": statusUpdate(topic, message, sockets)
         break;
 
       case "Temp": updateTemp(topic, JSON.parse(message));
@@ -59,4 +59,7 @@ module.exports.sockets = function (sockets) {
 
 
   })
+
+
+  
 }

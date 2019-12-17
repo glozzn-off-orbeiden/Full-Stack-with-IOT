@@ -15,7 +15,7 @@ const schemaTemp = new Schema({
             },
             timeStamp: {
                 type: Date,
-                default: Date.now()
+                default: Date.now
             }
         }],
     outdoor: [
@@ -28,7 +28,7 @@ const schemaTemp = new Schema({
             },
             timeStamp: {
                 type: Date,
-                default: Date.now()
+                default: Date.now
             }
         }]
 });
