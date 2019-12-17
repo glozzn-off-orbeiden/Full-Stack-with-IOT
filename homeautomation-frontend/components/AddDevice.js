@@ -7,7 +7,8 @@ import {
     ImageBackground, 
     Dimensions, 
     TextInput, 
-    TouchableOpacity, 
+    TouchableOpacity,
+    KeyboardAvoidingView, 
 } from 'react-native';
 import ModalDropdown from "react-native-modal-dropdown";
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -67,78 +68,82 @@ export default function Temp() {
 
     return (
         <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
-            <ScrollView style={styles.mainPart}>
-                    
-                <View style={styles.headerWrapper}>
-                    <View style={styles.headerBorder}>
-                        <Text style={styles.header}>Add Device</Text>
-                    </View>    
+            <KeyboardAvoidingView 
+                    behavior="padding"
+                    style={styles.keyboardAvoid}>
+                
+                <ScrollView style={styles.mainPart}>
 
-                </View>
+                    <View style={styles.headerWrapper}>
+                        <View style={styles.headerBorder}>
+                            <Text style={styles.header}>Add Device</Text>
+                        </View>    
 
-                <View style={styles.inputWrapper}>
+                    </View>
 
-                    <ModalDropdown
-                        style={styles.dropDownBox}
-                        textStyle={styles.dropDownBoxText}
-                        dropdownStyle={styles.dropDown}
-                        dropdownTextStyle={styles.dropDownText}
-                        options={options}
-                        defaultValue={Device}
-                        onSelect={(index, value) => {
-                            setDevice(value);
-                            console.log(value);
-                        }}
-                        />                       
+                    <View style={styles.inputWrapper}>
 
-                    <View>
+                        <ModalDropdown
+                            style={styles.dropDownBox}
+                            textStyle={styles.dropDownBoxText}
+                            dropdownStyle={styles.dropDown}
+                            dropdownTextStyle={styles.dropDownText}
+                            options={options}
+                            defaultValue={Device}
+                            onSelect={(index, value) => {
+                                setDevice(value);
+                                console.log(value);
+                            }}
+                            />                       
 
-                        <TextInput
-                            placeholder="Room"
+                        <View>
+
+                            <TextInput
+                                placeholder="Room"
+                                style={styles.textInput}
+                                value={value}
+                                maxLength={15}
+                                onChangeText={text => onChangeText(text)}
+                                />
+
+                        </View>
+
+                        <View >
+
+                            <TextInput
+                            placeholder="Description"
                             style={styles.textInput}
-                            value={value}
+                            value={value2}
                             maxLength={15}
-                            onChangeText={text => onChangeText(text)}
+                            onChangeText={text => onChangeText2(text)}
                             />
 
+                        </View>
+
+                        <View style={styles.buttonWrapper}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    submitHandler(Device)
+                                    setDevice("Select Device")
+                                    onChangeText(null)
+                                    onChangeText2(null)
+                                    console.log("submit");
+                                }}>
+
+                                <View style={styles.submit}>
+                                    <PlusIcon
+                                        name="plus"
+                                        style={styles.plusIcon}
+                                        color="rgb(255,255,255)"
+                                        />
+                                </View>
+                            </TouchableOpacity>
+
+                        </View>
                     </View>
 
-                    <View >
-
-                        <TextInput
-                        placeholder="Description"
-                        style={styles.textInput}
-                        value={value2}
-                        maxLength={15}
-                        onChangeText={text => onChangeText2(text)}
-                        />
-
-                    </View>
-
-                    <View style={styles.buttonWrapper}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                submitHandler(Device)
-                                setDevice("Select Device")
-                                onChangeText(null)
-                                onChangeText2(null)
-                                console.log("submit");
-                            }}>
-
-                            <View style={styles.submit}>
-                                <PlusIcon
-                                    name="plus"
-                                    style={styles.plusIcon}
-                                    color="rgb(255,255,255)"
-                                    />
-                            </View>
-                        </TouchableOpacity>
-
-                    </View>
-                </View>
-                
-
-            </ScrollView>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </ImageBackground>
     )
 }
@@ -148,6 +153,10 @@ const styles = EStyleSheet.create({
         flex: 1,
         width: "360rem",
         height: "100%",
+    },
+    keyboardAvoid: {
+        flex: 1,
+        justifyContent: "flex-end"
     },
     mainPart: {
         paddingTop: "50rem",
