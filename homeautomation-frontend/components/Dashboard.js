@@ -1,5 +1,4 @@
 import React, { Component } from "react";
- 
 import { 
     StyleSheet, 
     View, 
@@ -66,24 +65,16 @@ export default class Dashboard extends Component {
 
         <ScrollView style={styles.mainPart}>
 
-          {/* <Card style={styles.topPart}>
-            <View style={{ width: "50%" }}>
-              <Time />
-            </View>
-            <View>
-              <Text>Temperature</Text>
-              <Text>{this.state.currentTemp} &#8451;</Text>
-            </View>
-          </Card> */}
           <View style={styles.topPart}>
 
-            <View key="topPart" style={[styles.item, styles.flexTop]}>
-               
-                <View style={{ width: "50%" }}>
-                  <Time />
-                </View>
-                <View style={styles.temp}>
-                  <Text style={styles.tempText}>{this.state.currentTemp}&#8451;</Text>
+            <View key="topPart" style={styles.item}>
+               <View style={styles.flexTop}>
+                  <View style={{ width: "50%" }}>
+                    <Time />
+                  </View>
+                  <View style={styles.temp}>
+                    <Text style={styles.tempText}>{this.state.currentTemp}&#8451;</Text>
+                  </View>
                 </View>
             </View>
                   
@@ -182,16 +173,8 @@ const styles = EStyleSheet.create({
     flex: 1,
     width: "360rem",
     height: "100%",
-    // backgroundColor: "rgba(0,0,0,0.2)",
-    // borderRadius: 4,
-    // borderWidth: 2,
-    // borderColor: "red"
   },
   mainPart: {
-    // backgroundColor: "rgba(0,0,0,0.2)",
-    // borderRadius: 2,
-    // borderWidth: 2,
-    // height: "100%",
     paddingTop: "50rem",
     paddingLeft: "20rem",
     paddingRight: "20rem",
@@ -201,9 +184,14 @@ const styles = EStyleSheet.create({
     marginBottom: "40rem",
   },
   flexTop: {
+    height: "110rem",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    margin: "20rem",
+    borderColor: "rgba(255,255,255,0.5)",
+    borderWidth: 1,
+    borderRadius: 10,
   },
   item: {
     backgroundColor: "rgba(0,0,0,0.6)",

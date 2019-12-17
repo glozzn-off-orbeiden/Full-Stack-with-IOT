@@ -5,26 +5,32 @@ const Schema = mongoose.Schema;
 
 
 const schemaTemp = new Schema({
-    indoor:[[
+    indoor: [
         {
-        temp:  {
-            type: String
-        },
-        humidity: {
-            type: String
-        },
-        timeStamp: Date
-    }]],
-    outdoor: [[
+            temp: {
+                type: String
+            },
+            humidity: {
+                type: String
+            },
+            timeStamp: {
+                type: Date,
+                default: Date.now()
+            }
+        }],
+    outdoor: [
         {
-        temp:  {
-            type: String
-        },
-        humidity: {
-            type: String
-        },
-        timeStamp: Date
-    }]]
+            temp: {
+                type: String
+            },
+            humidity: {
+                type: String
+            },
+            timeStamp: {
+                type: Date,
+                default: Date.now()
+            }
+        }]
 });
 
 
