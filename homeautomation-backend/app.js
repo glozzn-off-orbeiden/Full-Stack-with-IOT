@@ -9,16 +9,14 @@ const path = require("path");
  **require Routes
  */
 
-
-const routeTemp = require("../homeautomation-backend/routes/routeTemp.js")
+const routeTemp = require("../homeautomation-backend/routes/routeTemp.js");
 const routeDashboard = require("../homeautomation-backend/routes/routeDashboard");
 //const routeTemp = require("../routes/routeTemp.js")
 //const routeUser = require("../routes/routeUser.js")
-const routeLight = require("../homeautomation-backend/routes/routeLight")
+const routeLight = require("../homeautomation-backend/routes/routeLight");
 
 const errorMiddleware = require("./middleware/error");
 // require("./middleware/mqtt");
-
 
 // let corsOptions = {
 //     origin: 'http://localhost:3000',
@@ -39,8 +37,7 @@ app.use(cors(/* corsOptions */));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-
-app.use("/status/", routeDashboard)
+app.use("/status/", routeDashboard);
 app.use("/temp/", routeTemp);
 app.use("/lights/", routeLight);
 //app.use('/user/', routeUser);

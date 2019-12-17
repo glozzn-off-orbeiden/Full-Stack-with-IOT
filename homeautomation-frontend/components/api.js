@@ -1,5 +1,4 @@
-
-import { url } from '../config.js';
+import { url } from "../config.js";
 console.log(url);
 
 async function fetchStatus() {
@@ -45,7 +44,7 @@ async function fetchLights() {
     () => console.log("on showing error");
   }
 }
-//temperature fetching, 
+//temperature fetching,
 async function fetchTemperature() {
   try {
     const res = await fetch(url + "/temp");
@@ -58,10 +57,9 @@ async function fetchTemperature() {
     };
   }
 }
-
- 
+//go to AddDevice.js function
 async function createLight(data) {
-  let body = { ...data }
+  let body = { ...data };
 
   const option = {
     method: "PUT",
@@ -71,9 +69,91 @@ async function createLight(data) {
     }
   };
   try {
-    //console.log("hello2");
-
+    console.log("createLight");
     let res = await fetch(url + "/lights/", option);
+    let data = await res.json();
+    console.log("api call", data);
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
+//newly created 1
+async function createTemp(data) {
+  let body = { ...data };
+  const option = {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  try {
+    console.log("create Temp");
+    let res = await fetch(url + "/temp/", option);
+    let data = await res.json();
+    console.log("api call", data);
+
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
+//newly created 2
+async function createDoor(data) {
+  let body = { ...data };
+  const option = {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  try {
+    console.log("create Door");
+    let res = await fetch(url + "/Door/", option);
+    let data = await res.json();
+    console.log("api call", data);
+
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
+//newly created 3
+async function createDoorBell(data) {
+  let body = { ...data };
+  const option = {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  try {
+    console.log("create Doorbell");
+    let res = await fetch(url + "/Doorbell/", option);
+    let data = await res.json();
+    console.log("api call", data);
+
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
+//newly created 4
+async function createWindow(data) {
+  let body = { ...data };
+  const option = {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  try {
+    console.log("create Window");
+    let res = await fetch(url + "/Window/", option);
     let data = await res.json();
     console.log("api call", data);
 
@@ -83,34 +163,36 @@ async function createLight(data) {
   }
 }
 
-export { fetchStatus, fetchLights, fetchTemperature, createLight };
-
-/* async function fetchTemperature() {
+//fetching data
+async function fetchtemp(data) {
+  let body = { ...data };
   const option = {
-    method: "GET",
+    method: "PUT",
+    body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json"
     }
   };
-fetchTemperature = async () => {
-        try {
-          const data = await fetchTemperature();
-          console.log("promise?", data);
-          this.setState({
-            currentTemp: data.currentTemp
-            /* lights: data.Lights 
-          });
-        } catch (err) {
-          () => {
-            console.log(err)
-          }
-        }
-      componentDidMount() {
-        this.fetchTemperature()
-      };
-    }
-  }
- */
-//console.log("hello");
+  try {
+    //console.log("hello2");
+    let res = await fetch(url + "/temp/", option);
+    let data = await res.json();
+    console.log("api call", data);
 
- 
+    return data;
+  } catch (error) {
+    () => console.log("on showing error");
+  }
+}
+
+export {
+  fetchStatus,
+  fetchLights,
+  fetchTemperature,
+  createLight,
+  createDoor,
+  createTemp,
+  createDoorBell,
+  createWindow,
+  fetchtemp
+};
