@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { 
+
+import {
+  ActivityIndicator,
   StyleSheet, 
   View, 
   Button, 
@@ -8,6 +10,7 @@ import {
   ScrollView, 
   Dimensions 
 } from "react-native";
+
 import PureChart from "react-native-pure-chart";
 import { fetchTemperature } from "./api";
 import { element } from "prop-types";
@@ -19,18 +22,57 @@ EStyleSheet.build({$rem: entireScreenWidth / 360});
 
 export default class Temp extends Component {
   state = {
-    Temp: "0"
+    isLoading: true,
+    newTempData: null,
+    humidityData2: null
   };
+
   fetchData = async () => {
     try {
       const data = await fetchTemperature();
-      console.log(
-        "from here",
-        data[0].indoor.map(element => element[0].temp)
-      );
+      let newData = data[0].indoor;
+      console.log("here", newData);
+      temp = [];
+      timeStamp = [];
+      humidity = [];
+      let len = newData.length - 1;
+      for (let i = len; i >= 0; i--) {
+        temp.push(newData[i].temp);
+        humidity.push(newData[i].humidity);
+        timeStamp.push(newData[i].timeStamp);
+      }
+
+      console.log(temp);
+      console.log(humidity);
+      console.log(timeStamp);
+      let tempData = [];
+      let tempDataLen = 0;
+      if (timeStamp.length >= 5) {
+        tempDataLen = 5;
+      } else tempDataLen = timeStamp.length - 1;
+
+      for (let i = tempDataLen; i >= 0; i--) {
+        let obj = {};
+        obj["x"] = timeStamp[i].slice(11, 19);
+        obj["y"] = Number(temp[i]);
+        tempData.push(obj);
+      }
+
+      let humidityData = [];
+      for (let i = tempDataLen; i >= 0; i--) {
+        let obj = {};
+        obj["x"] = timeStamp[i].slice(11, 19);
+        obj["y"] = Number(humidity[i]);
+        humidityData.push(obj);
+      }
+
+      console.log("ggggggg", tempData);
+      console.log("ggggggggg", humidityData);
 
       this.setState({
-        Temp: data.Object.temp
+        isLoading: false,
+        humidityData2: humidityData,
+        newTempData: tempData
       });
     } catch (err) {
       () => {
@@ -42,9 +84,11 @@ export default class Temp extends Component {
   componentDidMount() {
     this.fetchData();
   }
+
   render() {
-    // console.log(this.state, "fetchData");
-    let sampleData = [
+
+    console.log("fetchData", this.state);
+    /*let sampleData = [
       {
         seriesName: "series1",
         data: [
@@ -103,8 +147,27 @@ export default class Temp extends Component {
         ],
         color: "rgb(0,122,255)"
       }
-    ];
-    return (
+    ];*/
+    if (this.state.isLoading) {
+      return (
+        <View>
+          <ActivityIndicator />
+        </View>
+      );
+    } else {
+      let sampleData = [
+        {
+          seriesName: "series1",
+          data: this.state.newTempData,
+          color: "#297AB1"
+        },
+        {
+          seriesName: "series2",
+          data: this.state.humidityData2,
+          color: "red"
+        }
+      ];
+      return (
       <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
         <ScrollView style={styles.mainPart}>
 
@@ -146,32 +209,11 @@ export default class Temp extends Component {
             </View>
           </View>
           
-            {/* <PureChart type={'line'}
-            data={this.state.data}
-            width={'100%'}
-            height={100}
-            onPress={(a) => {
-              console.log('onPress', a)
-            }}
-            xAxisColor={'black'}
-            yAxisColor={'red'}
-            xAxisGridLineColor={'red'}
-            yAxisGridLineColor={'red'}
-            minValue={10}
-            labelColor={'red'}
-            showEvenNumberXaxisLabel={false}
-            customValueRenderer={(index, point) => {
-              if (index < 3) return null
-              return (
-                <Text style={{textAlign: 'center'}}>{point.y}</Text>
-              )
-            }}
-            /> */}
-
-
         </ScrollView>
       </ImageBackground>
     );
+    }
+
   }
 }
 
