@@ -67,6 +67,7 @@ export default function Temp() {
 
 
     return (
+
         <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
             <KeyboardAvoidingView
                     behavior="padding"
