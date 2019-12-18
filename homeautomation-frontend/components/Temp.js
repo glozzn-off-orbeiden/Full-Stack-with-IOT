@@ -168,7 +168,7 @@ export default class Temp extends Component {
         }
       ];
       return (
-      <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
+      <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
         <ScrollView style={styles.mainPart}>
 
           <View style={styles.topPart}>

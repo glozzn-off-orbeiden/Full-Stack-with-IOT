@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { 
-    AppRegistry, 
-    StyleSheet, 
-    View, 
-    Button, 
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Button,
     Text,
     ImageBackground,
-    ScrollView, 
-    Dimensions 
+    ScrollView,
+    Dimensions
         } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import FoundationIcon from "react-native-vector-icons/Foundation";
@@ -65,7 +65,7 @@ export default class Lights extends Component {
     };
 
     // activateLight = (light) => {
-        
+
     //     if(light.Status === "off") {
     //         this.setState()
     // } else {
@@ -76,7 +76,7 @@ export default class Lights extends Component {
         try {
           const data = await fetchLights();
           console.log("promise?", data);
-    
+
           this.setState({
             lights: data.Lights
           });
@@ -108,7 +108,7 @@ export default class Lights extends Component {
                                             style={[styles.lightBulb, {backgroundColor: light.Status === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
 
                                             <FoundationIcon
-                                                style={{fontSize: 40}} 
+                                                style={{fontSize: 40}}
                                                 onPress={() => console.log(light.Name)}
                                                 name="lightbulb"
                                                 color="rgb(255,255,255)"
@@ -141,8 +141,8 @@ export default class Lights extends Component {
                         </View>
 
         let lightsContent;
-    
-        
+
+
         if ((!activeLights.length) && (!disconnectedLights.length)){
             console.log("No light"),
             lightsContent = noLight;
@@ -156,16 +156,16 @@ export default class Lights extends Component {
             console.log("Lights & disconnected lights rendered")
             lightsContent = [...renderLights, ...renderDisconnectedLights];
         }
-        
+
 
         return (
-            <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
+            <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
                 <ScrollView style={styles.mainPart}>
 
                     <View style={styles.lightsBox}>
                         {lightsContent}
                     </View>
-                            
+
                     <View style={styles.buffer}></View>
                 </ScrollView>
 
@@ -229,7 +229,7 @@ const styles = EStyleSheet.create({
         borderRadius: 50,
     },
     lightText: {
-        color: "rgb(255,255,255)", 
+        color: "rgb(255,255,255)",
         textAlign: "center",
         position: "absolute",
         bottom: 10,
