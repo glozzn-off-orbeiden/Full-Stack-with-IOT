@@ -64,21 +64,28 @@ export default class Lights extends Component {
         ]
     };
 
-    // activateLight = (light) => {
-
-    //     if(light.Status === "off") {
-    //         this.setState()
-    // } else {
-
-    // }
+    activateLight = (light,token) => {
+        console.log(light.Token);
+        console.log(token);
+        let testToken = light.Token;
+        
+        let match = this.state.lights.filter( matchingLight => {
+            matchingLight.Token === testToken;
+            return 
+        })
+        console.log(match);
+        
+        // let newState= {...match, Status:"on"};
+        // this.setState({...this.state.lights,lights: newState})
+        // console.log(this.state);
+        
+    }
 
     fetchData = async () => {
         try {
           const data = await fetchLights();
-          console.log("promise?", data);
-
           this.setState({
-            lights: data.Lights
+            lights: data[0].Light
           });
         } catch (err) {
           () => {
@@ -87,54 +94,14 @@ export default class Lights extends Component {
         }
       }
 
-    // componentDidMount() {
+    componentDidMount() {
 
-    //     this.fetchData()
-    //     alertHandler()
-    //   }
+        this.fetchData()
+        alertHandler()
+      }
     render() {
-        console.log("lights rendering");
-
-        let activeLights = this.state.lights.filter(light => {
-              return ((light.Status === "off") || (light.Status === "on"))
-            });
-
-        let disconnectedLights = this.state.lights.filter(light => light.Status === "disconnect");
-
-        let renderLights = activeLights.map((light, index) => {
-
-                                return <View key={index+"a"} style={styles.item}>
-                                        <View
-                                            style={[styles.lightBulb, {backgroundColor: light.Status === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
-
-                                            <FoundationIcon
-                                                style={{fontSize: 40}}
-                                                onPress={() => console.log(light.Name)}
-                                                name="lightbulb"
-                                                color="rgb(255,255,255)"
-                                            />
-                                        </View>
-                                        <Text style={[styles.lightText, ]}>{light.Name}</Text>
-                                    </View>;
-                                }
-                            )
-
-        let renderDisconnectedLights = disconnectedLights.map( (light, index) => {
-
-                                    return <View key={index+"d"} style={styles.item}>
-                                                <Text style={styles.disconnectedText}>Disconnected</Text>
-                                                <View style={styles.lightBulb}>
-                                                    <FoundationIcon
-                                                        style={{ fontSize: 40 }}
-                                                        name="lightbulb"
-                                                        color={"rgb(0,0,0)"}
-                                                        onPress={() => console.log(light.Name)}
-                                                    />
-                                                </View>
-                                                <Text style={[styles.lightText, {color: "rgba(255,255,255,0.5)"}]}>{light.Name}</Text>
-                                            </View>
-                                        }
-                                    )
+        //console.log("lights rendering");
+        //console.log("this.state", this.state.lights)
 
         let noLight = <View style={styles.noLight}>
                             <Text style={styles.noLightText}>No lights registered</Text>
@@ -142,20 +109,74 @@ export default class Lights extends Component {
 
         let lightsContent;
 
-
-        if ((!activeLights.length) && (!disconnectedLights.length)){
-            console.log("No light"),
+        if(((typeof this.state.lights) === "undefined") || (!this.state.lights.length)) {
+            // console.log("No light"),
             lightsContent = noLight;
-        } else if (!disconnectedLights.length){
-            console.log("Lights rendered")
-            lightsContent = renderLights;
-        } else if (!activeLights.length){
-            console.log("Disconnected lights rendered")
-            lightsContent = renderDisconnectedLights;
         } else {
-            console.log("Lights & disconnected lights rendered")
-            lightsContent = [...renderLights, ...renderDisconnectedLights];
-        }
+
+            let activeLights = this.state.lights.filter(light => {
+                return ((light.Status === "off") || (light.Status === "on"))
+                });
+
+
+            let disconnectedLights = this.state.lights.filter(light => light.Status === "disconnect");
+
+            let renderLights = activeLights.map((light, index) => {
+
+                                    return <View key={index+"a"} token={light.Token} style={styles.item}>
+                                            <View
+                                                style={[styles.lightBulb, {backgroundColor: light.Status === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+
+                                                <FoundationIcon
+                                                    style={{fontSize: 40}} 
+                                                    onPress={() => {
+                                                        this.activateLight(light, light.Token)
+                                                        //console.log(light.Name, this.light.token)
+                                                        //console.log(this.state);
+                                                    }
+                                                        
+                                                        
+                                                    }
+                                                    name="lightbulb"
+                                                    color="rgb(255,255,255)"
+                                                />
+                                            </View>
+                                            <Text style={[styles.lightText, ]}>{light.Name}</Text>
+                                        </View>;
+                                    }
+                                )
+
+            let renderDisconnectedLights = disconnectedLights.map( (light, index) => {
+
+
+            return <View key={index+"d"} token={light.Token} style={styles.item}>
+                                                    <Text style={styles.disconnectedText}>Disconnected</Text>
+                                                    <View style={styles.lightBulb}>
+                                                        <FoundationIcon
+                                                            style={{ fontSize: 40 }}
+                                                            name="lightbulb"
+                                                            color={"rgb(0,0,0)"}
+                                                            onPress={() => console.log(light.Name, light.Token)}
+                                                        />
+                                                    </View>
+                                                    <Text style={[styles.lightText, {color: "rgba(255,255,255,0.5)"}]}>{light.Name}</Text>
+                                                </View>
+                                            }
+                                        )
+
+            
+        
+            
+            if (!disconnectedLights.length){
+                // console.log("Lights rendered")
+                lightsContent = renderLights;
+            } else if (!activeLights.length){
+                // console.log("Disconnected lights rendered")
+                lightsContent = renderDisconnectedLights;
+            } else {
+                // console.log("Lights & disconnected lights rendered")
+                lightsContent = [...renderLights, ...renderDisconnectedLights];
+            }
 
 
         return (

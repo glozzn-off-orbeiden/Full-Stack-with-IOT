@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  Button,
-  Text,
-  ImageBackground,
-  ScrollView,
-  Dimensions
-} from "react-native";
+import { 
+    StyleSheet, 
+    View, 
+    Button, 
+    Text,
+    ImageBackground,
+    ScrollView, 
+    Dimensions,
+    Alert
+  } from "react-native";
+
 import MoonIcon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
@@ -128,13 +130,23 @@ export default class Dashboard extends Component {
                 <View
                   style={[styles.icon, { backgroundColor: this.state.MainDoor === "unlocked" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                   <KeyIcon
-                    style={{ fontSize: 25 }}
-                    name="key"
-                    color="rgb(255,255,255)"
-                    onPress={() => {
-                      alert("You tapped the button!");
-                    }}
-                  />
+                      style={{ fontSize: 25 }}
+                      name="key"
+                      color="rgb(255,255,255)"
+                      onPress={() => {
+                        Alert.alert(
+                          "Door",
+                          "Open?",
+                          [
+                            {text: 'Ok', onPress: () => console.log('Ok')},
+                            {
+                              text: 'Cancel', onPress: () => console.log('Cancel Pressed'),
+                              style: 'cancel',
+                            },
+                          ],
+                          {cancelable: false},);
+                      }}
+                    />
                 </View>
               </View>
 
