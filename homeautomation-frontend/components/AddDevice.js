@@ -1,14 +1,14 @@
 
 import React, { useState } from 'react'
-import { 
-    Text, 
-    ScrollView, 
-    View, 
-    ImageBackground, 
-    Dimensions, 
-    TextInput, 
+import {
+    Text,
+    ScrollView,
+    View,
+    ImageBackground,
+    Dimensions,
+    TextInput,
     TouchableOpacity,
-    KeyboardAvoidingView, 
+    KeyboardAvoidingView,
 } from 'react-native';
 import ModalDropdown from "react-native-modal-dropdown";
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -40,44 +40,45 @@ export default function Temp() {
         switch (Device) {
             case "Light": createLight(newDevice);
                         console.log(newDevice);
-                        
-    
+
+
                 break;
             case "Temp": /* createTemp(newDevice) */
-    
+
                 break;
             case "Door": /* createDoor(newDevice) */
-    
+
                 break;
             case "Doorbell": /* createDoorbell(newDevice) */ console.log(newDevice );
-            
-    
+
+
                 break;
-            case "Window": /* createWindow(newDevice) */ 
-    
+            case "Window": /* createWindow(newDevice) */
+
                 break;
-    
+
             default: setDevice("Select a Device!");
-            
+
                 break;
         }
-    
-    } 
 
-    
+    }
+
+
 
     return (
-        <ImageBackground source={require("../assets/painting-1831696_1920.jpg")} style={styles.container}>
-            <KeyboardAvoidingView 
+
+        <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
+            <KeyboardAvoidingView
                     behavior="padding"
                     style={styles.keyboardAvoid}>
-                
+
                 <ScrollView style={styles.mainPart}>
 
                     <View style={styles.headerWrapper}>
                         <View style={styles.headerBorder}>
                             <Text style={styles.header}>Add Device</Text>
-                        </View>    
+                        </View>
 
                     </View>
 
@@ -94,7 +95,7 @@ export default function Temp() {
                                 setDevice(value);
                                 console.log(value);
                             }}
-                            />                       
+                            />
 
                         <View>
 
@@ -198,7 +199,7 @@ const styles = EStyleSheet.create({
         paddingLeft: "5rem",
         justifyContent: "center",
         // alignItems: "center",
-        
+
     },
     dropDownBoxText: {
         fontSize: "20rem",
@@ -231,7 +232,7 @@ const styles = EStyleSheet.create({
         paddingTop: "4rem",
         borderRadius: 200,
 
-    }, 
+    },
     plusIcon: {
         fontSize: "40rem",
     },

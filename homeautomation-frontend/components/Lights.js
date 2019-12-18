@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { 
-    AppRegistry, 
-    StyleSheet, 
-    View, 
-    Button, 
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Button,
     Text,
     ImageBackground,
-    ScrollView, 
-    Dimensions 
+    ScrollView,
+    Dimensions
         } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import FoundationIcon from "react-native-vector-icons/Foundation";
@@ -84,8 +84,6 @@ export default class Lights extends Component {
     fetchData = async () => {
         try {
           const data = await fetchLights();
-          //console.log("promise? lights", data);
-    
           this.setState({
             lights: data[0].Light
           });
@@ -120,6 +118,7 @@ export default class Lights extends Component {
                 return ((light.Status === "off") || (light.Status === "on"))
                 });
 
+
             let disconnectedLights = this.state.lights.filter(light => light.Status === "disconnect");
 
             let renderLights = activeLights.map((light, index) => {
@@ -149,7 +148,8 @@ export default class Lights extends Component {
 
             let renderDisconnectedLights = disconnectedLights.map( (light, index) => {
 
-                                        return <View key={index+"d"} token={light.Token} style={styles.item}>
+
+            return <View key={index+"d"} token={light.Token} style={styles.item}>
                                                     <Text style={styles.disconnectedText}>Disconnected</Text>
                                                     <View style={styles.lightBulb}>
                                                         <FoundationIcon
@@ -178,17 +178,17 @@ export default class Lights extends Component {
                 lightsContent = [...renderLights, ...renderDisconnectedLights];
             }
 
-        }
-        
 
         return (
-            <ImageBackground source={require("../assets/painting-1831696_1920.jpg")} style={styles.container}>
+
+            <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
+
                 <ScrollView style={styles.mainPart}>
 
                     <View style={styles.lightsBox}>
                         {lightsContent}
                     </View>
-                            
+
                     <View style={styles.buffer}></View>
                 </ScrollView>
 
@@ -252,7 +252,7 @@ const styles = EStyleSheet.create({
         borderRadius: 50,
     },
     lightText: {
-        color: "rgb(255,255,255)", 
+        color: "rgb(255,255,255)",
         textAlign: "center",
         position: "absolute",
         bottom: 10,
