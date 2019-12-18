@@ -9,19 +9,20 @@ import {
     Dimensions,
     Alert
   } from "react-native";
+
 import MoonIcon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import DoorIcon from "react-native-vector-icons/FontAwesome5";
 import KeyIcon from "react-native-vector-icons/FontAwesome5";
 import WindowIcon from "react-native-vector-icons/AntDesign";
 import Time from "./Time";
-import {fetchStatus} from "./api";
+import { fetchStatus } from "./api";
 import alertHandler from "./alerthandler";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 let entireScreenWidth = Dimensions.get('window').width;
 
-EStyleSheet.build({$rem: entireScreenWidth / 360});
+EStyleSheet.build({ $rem: entireScreenWidth / 360 });
 
 
 const INITIAL_VALUE = 0;
@@ -59,35 +60,35 @@ export default class Dashboard extends Component {
   }
 
 
- render() {
+  render() {
     //console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
-      <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
+      <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
 
         <ScrollView style={styles.mainPart}>
 
           <View style={styles.topPart}>
 
             <View key="topPart" style={styles.item}>
-               <View style={styles.flexTop}>
-                  <View style={{ width: "50%" }}>
-                    <Time />
-                  </View>
-                  <View style={styles.temp}>
-                    <Text style={styles.tempText}>{this.state.currentTemp}&#8451;</Text>
-                  </View>
+              <View style={styles.flexTop}>
+                <View style={{ width: "50%" }}>
+                  <Time />
                 </View>
+                <View style={styles.temp}>
+                  <Text style={styles.tempText}>{this.state.currentTemp}&#8451;</Text>
+                </View>
+              </View>
             </View>
-                  
+
           </View>
 
           <View style={styles.statusBox}>
 
             <View style={[styles.item, styles.itemStatusBox]}>
-              <View 
-                style={[styles.icon, {backgroundColor: this.state.Doors === "open" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+              <View
+                style={[styles.icon, { backgroundColor: this.state.Doors === "open" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                 <DoorIcon
-                  style={{fontSize: 30}} 
+                  style={{ fontSize: 30 }}
                   onPress={() => console.log("Door")}
                   name={this.state.Doors == "open" ? "door-open" : "door-closed"}
                   color="rgb(255,255,255)"
@@ -98,9 +99,9 @@ export default class Dashboard extends Component {
 
             <View style={[styles.item, styles.itemStatusBox]}>
               <View
-                style={[styles.icon, {backgroundColor: this.state.Windows === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                style={[styles.icon, { backgroundColor: this.state.Windows === "on" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                 <WindowIcon
-                  style={{fontSize: 40}} 
+                  style={{ fontSize: 40 }}
                   onPress={() => console.log("Window")}
                   name={this.state.Windows == "open" ? "windowso" : "windows"}
                   color="rgb(255,255,255)"
@@ -113,21 +114,21 @@ export default class Dashboard extends Component {
 
               <View style={[styles.item, styles.itemActionBox, styles.lightAction]}>
                 <View
-                    style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgba(91, 194, 54, 0.9)":"rgba(255,255,255,0.5)"}]}>
+                  style={[styles.icon, { backgroundColor: this.state.Lights === "on" ? "rgba(91, 194, 54, 0.9)" : "rgba(255,255,255,0.5)" }]}>
 
-                    <FoundationIcon
-                        style={{fontSize: 30}} 
-                        onPress={() => console.log("lights")}
-                        name="lightbulb"
-                        color="rgb(255,255,255)"
-                    />
+                  <FoundationIcon
+                    style={{ fontSize: 30 }}
+                    onPress={() => console.log("lights")}
+                    name="lightbulb"
+                    color="rgb(255,255,255)"
+                  />
 
                 </View>
               </View>
 
               <View style={[styles.item, styles.itemActionBox]}>
                 <View
-                  style={[styles.icon, {backgroundColor: this.state.MainDoor === "unlocked" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                  style={[styles.icon, { backgroundColor: this.state.MainDoor === "unlocked" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                   <KeyIcon
                       style={{ fontSize: 25 }}
                       name="key"
@@ -151,7 +152,7 @@ export default class Dashboard extends Component {
 
               <View style={[styles.item, styles.itemActionBox]}>
                 <View
-                  style={[styles.icon, {backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)":"rgba(255,255,255,0.5)"}]}>
+                  style={[styles.icon, { backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                   <MoonIcon
                     style={{ fontSize: 35 }}
                     name="ios-moon"
@@ -230,11 +231,11 @@ const styles = EStyleSheet.create({
     width: "150rem"
   },
   icon: {
-      height: "70%",
-      width: "70%",
-      justifyContent: "center",
-      alignItems: "center",
-      borderRadius: 50,
+    height: "70%",
+    width: "70%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
   },
   actionBox: {
     flexDirection: "row",

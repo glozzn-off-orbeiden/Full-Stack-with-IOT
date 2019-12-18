@@ -20,7 +20,7 @@ const schemaStatus = new Schema({
             },
             Status: {
                 type: String,
-                default: 'off'
+                default: 'disconnected'
             }
 
         }
@@ -35,7 +35,7 @@ const schemaStatus = new Schema({
             },
             Status: {
                 type: String,
-                default: 'closed'
+                default: 'disconnected'
             },
         }
     ],
@@ -48,7 +48,7 @@ const schemaStatus = new Schema({
             },
             Status: {
                 type: String,
-                default: 'closed'
+                default: 'disconnected'
             }
 
         }
