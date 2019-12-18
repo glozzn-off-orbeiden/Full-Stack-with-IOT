@@ -62,7 +62,7 @@ export default class Dashboard extends Component {
  render() {
     //console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
-      <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
+      <ImageBackground source={require("../assets/painting-1831696_1920.jpg")} style={styles.container}>
 
         <ScrollView style={styles.mainPart}>
 

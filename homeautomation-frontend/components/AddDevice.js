@@ -67,7 +67,7 @@ export default function Temp() {
     
 
     return (
-        <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
+        <ImageBackground source={require("../assets/painting-1831696_1920.jpg")} style={styles.container}>
             <KeyboardAvoidingView 
                     behavior="padding"
                     style={styles.keyboardAvoid}>

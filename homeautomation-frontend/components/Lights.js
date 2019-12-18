@@ -182,7 +182,7 @@ export default class Lights extends Component {
         
 
         return (
-            <ImageBackground source={require("../assets/raindrop.jpg")} style={styles.container}>
+            <ImageBackground source={require("../assets/painting-1831696_1920.jpg")} style={styles.container}>
                 <ScrollView style={styles.mainPart}>
 
                     <View style={styles.lightsBox}>
