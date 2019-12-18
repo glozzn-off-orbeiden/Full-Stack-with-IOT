@@ -31,7 +31,7 @@ export default class Temp extends Component {
     try {
       const data = await fetchTemperature();
       let newData = data[0].indoor;
-      console.log("here", newData);
+      // console.log("here", newData);
       temp = [];
       timeStamp = [];
       humidity = [];
@@ -42,9 +42,9 @@ export default class Temp extends Component {
         timeStamp.push(newData[i].timeStamp);
       }
 
-      console.log(temp);
-      console.log(humidity);
-      console.log(timeStamp);
+      // console.log(temp);
+      // console.log(humidity);
+      // console.log(timeStamp);
       let tempData = [];
       let tempDataLen = 0;
       if (timeStamp.length >= 5) {
@@ -66,8 +66,8 @@ export default class Temp extends Component {
         humidityData.push(obj);
       }
 
-      console.log("ggggggg", tempData);
-      console.log("ggggggggg", humidityData);
+      // console.log("ggggggg", tempData);
+      // console.log("ggggggggg", humidityData);
 
       this.setState({
         isLoading: false,
@@ -87,7 +87,9 @@ export default class Temp extends Component {
 
   render() {
 
-    console.log("fetchData", this.state);
+
+    // console.log("fetchData", this.state);
+
     let sampleData = [
       {
         seriesName: "series1",

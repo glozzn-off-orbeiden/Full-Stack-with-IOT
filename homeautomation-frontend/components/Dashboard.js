@@ -6,7 +6,8 @@ import {
     Text,
     ImageBackground,
     ScrollView, 
-    Dimensions 
+    Dimensions,
+    Alert
   } from "react-native";
 import MoonIcon from "react-native-vector-icons/Ionicons";
 import FoundationIcon from "react-native-vector-icons/Foundation";
@@ -132,7 +133,17 @@ export default class Dashboard extends Component {
                       name="key"
                       color="rgb(255,255,255)"
                       onPress={() => {
-                        alert("You tapped the button!");
+                        Alert.alert(
+                          "Door",
+                          "Open?",
+                          [
+                            {text: 'Ok', onPress: () => console.log('Ok')},
+                            {
+                              text: 'Cancel', onPress: () => console.log('Cancel Pressed'),
+                              style: 'cancel',
+                            },
+                          ],
+                          {cancelable: false},);
                       }}
                     />
                 </View>
