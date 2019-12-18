@@ -49,7 +49,7 @@ async function fetchTemperature() {
   try {
     const res = await fetch(url + "/temp");
     const data = await res.json();
-    console.log("promise?", data);
+    // console.log("promise?", data);
     return data;
   } catch (err) {
     () => {
