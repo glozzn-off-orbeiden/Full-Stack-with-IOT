@@ -2,13 +2,13 @@ import React, { Component } from "react";
 
 import {
   ActivityIndicator,
-  StyleSheet, 
-  View, 
-  Button, 
+  StyleSheet,
+  View,
+  Button,
   Text,
   ImageBackground,
-  ScrollView, 
-  Dimensions 
+  ScrollView,
+  Dimensions
 } from "react-native";
 
 import PureChart from "react-native-pure-chart";
@@ -88,7 +88,7 @@ export default class Temp extends Component {
   render() {
 
     console.log("fetchData", this.state);
-    /*let sampleData = [
+    let sampleData = [
       {
         seriesName: "series1",
         data: [
@@ -147,7 +147,7 @@ export default class Temp extends Component {
         ],
         color: "rgb(0,122,255)"
       }
-    ];*/
+    ];
     if (this.state.isLoading) {
       return (
         <View>
@@ -189,16 +189,16 @@ export default class Temp extends Component {
           <View style={styles.chartWrapper}>
             <View style={styles.item}>
               <View style={styles.chartBox}>
-                <PureChart 
-                  data={sampleData} 
-                  type={"line"} 
+                <PureChart
+                  data={sampleData}
+                  type={"line"}
                   showEvenNumberXaxisLabel={false}
                   height={EStyleSheet.value("150rem")}
                   width={"100%"}
                   xAxisColor={'black'}
                   yAxisColor={'black'}
                   yAxisGridLineColor={"rgba(0,0,0,0.2)"}
-                  xAxisGridLineColor={"rgba(0,0,0,0.0)"}                  
+                  xAxisGridLineColor={"rgba(0,0,0,0.0)"}
                 />
               </View>
 
@@ -208,7 +208,7 @@ export default class Temp extends Component {
               </View>
             </View>
           </View>
-          
+
         </ScrollView>
       </ImageBackground>
     );
