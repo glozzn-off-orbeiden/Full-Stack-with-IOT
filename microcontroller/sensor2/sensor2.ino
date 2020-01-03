@@ -9,8 +9,8 @@
 #include <WiFiUdp.h>
 #include <ESP8266WiFi.h>
 
-
-
+#include <Adafruit_Sensor.h>
+#include <DHT.h> //DHT Bibliothek laden
 
 
 #include <DebugPrintMacros.h>
@@ -34,18 +34,22 @@
 #include <WiFiServer.h>
 #include <WiFiUdp.h>
 
+#define DHTPIN 5 //Der Sensor wird an PIN 2 angeschlossen  //gpio 5  
 
+#define DHTTYPE DHT22    // Es handelt sich um den DHT11 Sensor
+
+DHT dht(DHTPIN, DHTTYPE); //Der Sensor wird ab jetzt mit „dth“ angesprochen
 
 
 const char* FIRMWARE_VERSION = "1.0";
-//const char* ssid = "HOTSPOT HG";
-//const char* password = "";
+const char* ssid = "HOTSPOT HG ";
+const char* password = "";
 //const char* ssid     = "DCI Students";
 //const char* password = "7jYq4y5Sf5K2xX";
 //const char* mqtt_server = "172.31.32.160";
-const char* ssid     = "o2-WLAN72";
-const char* password = "78874N7T494FUVV9";
-const char* mqtt_server = "192.168.1.5";
+//const char* ssid     = "o2-WLAN72";
+//const char* password = "78874N7T494FUVV9";
+const char* mqtt_server = "10.3.0.83";
 bool currentState = false;
 char clientRSSI[50];
 void mqttCallback(char* topic, byte* payload, unsigned int length);
@@ -55,14 +59,11 @@ WiFiClient espClient;
 PubSubClient client(mqtt_server, 1883, mqttCallback, espClient);
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
 }
-int ledPin = 13; // choose the pin for the LED
-int inPin = 16;   // choose the input pin (for a pushbutton)
-int val = 0;     // variable for reading the pin status
+
 
 void setup() {
+   dht.begin();
   WiFi.disconnect(true);
-  pinMode(ledPin, OUTPUT);  // declare LED as output
-  pinMode(inPin, INPUT);    // declare pushbutton as input
   Serial.begin(115200);
   Serial.println(ssid);
   Serial.println(WiFi.status());
@@ -93,19 +94,25 @@ void loop() {
 
   if (!client.connected())
     reconnectMQTT();
+  float Luftfeuchtigkeit = dht.readHumidity(); //die Luftfeuchtigkeit auslesen und unter „Luftfeutchtigkeit“ speichern
+  float Temperatur = dht.readTemperature();
+ String message = "";
+ message = message.concat(Temperatur);
+ message = message.concat(" ");
+ message = message.concat(Luftfeuchtigkeit);
 
-  val = digitalRead(inPin);  // read input value
-  if (val == LOW) {         // check if the input is HIGH (button released)
-    digitalWrite(ledPin, LOW);  // turn LED OFF
 
-  } else {
-    digitalWrite(ledPin, HIGH);  // turn LED ON
-    Serial.println("Button pressed!");
-    client.publish("Doorbell/ON", "on");
-    delay(1500);
-  };
+
+//  byte plain[message.length()];
+//  byte* outboundMessage = message.getBytes(plain, message.length/());
+Serial.println("Test");
+ Serial.println(Temperatur);
+ Serial.println(Luftfeuchtigkeit);
+
+//client.publish("Temp/indoor", outboundMessage);
+   
   client.loop();
-  delay(0);
+  delay(1000);
 }
 void reconnectWifi() {
   WiFi.mode(WIFI_STA);
@@ -119,7 +126,7 @@ void reconnectWifi() {
 void reconnectMQTT() {
   while (!client.connected()) {
 
-    if (client.connect("sensor1", "sensors/health", 0, true, "offline")) {
+    if (client.connect("sensor2", "sensors/health", 0, true, "offline")) {
       Serial.println("MQTT succsess!");
       client.publish("sensors/rssi", clientRSSI);
       client.publish("sensors", "started");
