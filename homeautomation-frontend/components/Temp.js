@@ -18,7 +18,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 let entireScreenWidth = Dimensions.get('window').width;
 
-EStyleSheet.build({$rem: entireScreenWidth / 360});
+
 
 export default class Temp extends Component {
   state = {
@@ -86,7 +86,7 @@ export default class Temp extends Component {
   }
 
   render() {
-
+    EStyleSheet.build({ $rem: this.props.props / 360 });
 
     // console.log("fetchData", this.state);
 
@@ -171,51 +171,52 @@ export default class Temp extends Component {
       ];
       return (
 
-      <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
+        <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
 
-        <ScrollView style={styles.mainPart}>
+          <ScrollView style={styles.mainPart}>
 
-          <View style={styles.topPart}>
-            <View style={[styles.item, styles.tempNumbers]}>
-              <View style={styles.borderBox}>
-                <Text style={styles.tempText}>Indoor:</Text>
-                <Text style={styles.tempNumbersText}>22&#8451;</Text>
+            <View style={styles.topPart}>
+              <View style={[styles.item, styles.tempNumbers]}>
+                <View style={styles.borderBox}>
+                  <Text style={styles.tempText}>Indoor:</Text>
+                  <Text style={styles.tempNumbersText}>22&#8451;</Text>
+                </View>
+              </View>
+              <View style={[styles.item, styles.tempNumbers]}>
+                <View style={styles.borderBox}>
+                  <Text style={styles.tempText}>Outdoor:</Text>
+                  <Text style={styles.tempNumbersText}>5&#8451;</Text>
+                </View>
               </View>
             </View>
-            <View style={[styles.item, styles.tempNumbers]}>
-              <View style={styles.borderBox}>
-                <Text style={styles.tempText}>Outdoor:</Text>
-                <Text style={styles.tempNumbersText}>5&#8451;</Text>
+
+            <View style={styles.chartWrapper}>
+              <View style={styles.item}>
+                <View style={styles.chartBox}>
+                   <PureChart
+                    data={sampleData}
+                    type={"line"}
+                    showEvenNumberXaxisLabel={false}
+                    // height={EStyleSheet.value("150rem")}
+                    height={180}
+                    width={"100%"}
+                    xAxisColor={'black'}
+                    yAxisColor={'black'}
+                    yAxisGridLineColor={"rgba(0,0,0,0.2)"}
+                    xAxisGridLineColor={"rgba(0,0,0,0.0)"}
+                  /> 
+                </View>
+
+                <View style={styles.chartInfo}>
+                  <Text style={styles.chartInfoTemp}>Temperature</Text>
+                  <Text style={styles.chartInfoHum}>Humidity</Text>
+                </View>
               </View>
             </View>
-          </View>
 
-          <View style={styles.chartWrapper}>
-            <View style={styles.item}>
-              <View style={styles.chartBox}>
-                <PureChart
-                  data={sampleData}
-                  type={"line"}
-                  showEvenNumberXaxisLabel={false}
-                  height={EStyleSheet.value("150rem")}
-                  width={"100%"}
-                  xAxisColor={'black'}
-                  yAxisColor={'black'}
-                  yAxisGridLineColor={"rgba(0,0,0,0.2)"}
-                  xAxisGridLineColor={"rgba(0,0,0,0.0)"}
-                />
-              </View>
-
-              <View style={styles.chartInfo}>
-                <Text style={styles.chartInfoTemp}>Temperature</Text>
-                <Text style={styles.chartInfoHum}>Humidity</Text>
-              </View>
-            </View>
-          </View>
-
-        </ScrollView>
-      </ImageBackground>
-    );
+          </ScrollView>
+        </ImageBackground>
+      );
     }
 
   }

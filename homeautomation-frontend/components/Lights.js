@@ -13,19 +13,22 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import FoundationIcon from "react-native-vector-icons/Foundation";
 import PlusIcon from "react-native-vector-icons/AntDesign";
 import {fetchLights} from "./api";
+import socket from 'socket.io-client'
+import {url} from '../config'
 
 import alertHandler from './alerthandler';
 
 let entireScreenWidth = Dimensions.get('window').width;
 
-EStyleSheet.build({$rem: entireScreenWidth / 360});
+
 
 
 const INITIAL_VALUE = 0;
 export default class Lights extends Component {
+    
     state = {
         lights: [
-           {
+         /*   {
                 Name:"Hallway",
                 Status:"off"
            },
@@ -58,12 +61,12 @@ export default class Lights extends Component {
                 Status:"on"
             },
             {
-                Name:"Dungeon",
+                Name:"Dungeon",   
                 Status:"disconnect"
-            },
+            }, */
         ]
     };
-
+    io = socket(url/* , { forceNew: true } */)
     activateLight = (light,token) => {
         console.log(light.Token);
         console.log(token);
@@ -97,9 +100,11 @@ export default class Lights extends Component {
     componentDidMount() {
 
         this.fetchData()
-        alertHandler()
+  
       }
+
     render() {
+        EStyleSheet.build({$rem: this.props.props / 360});
         //console.log("lights rendering");
         //console.log("this.state", this.state.lights)
 
@@ -130,9 +135,14 @@ export default class Lights extends Component {
                                                 <FoundationIcon
                                                     style={{fontSize: 40}} 
                                                     onPress={() => {
-                                                        this.activateLight(light, light.Token)
+                                                        //this.activateLight(light, light.Token)
                                                         //console.log(light.Name, this.light.token)
-                                                        //console.log(this.state);
+                                                        console.log("test");
+                                                        this.io.emit("light",{Token: light.Token})
+                                                        this.io.on("light", function (data) {
+                                                            console.log("Hello", data);
+                                                            
+                                                        })
                                                     }
                                                         
                                                         
@@ -177,7 +187,7 @@ export default class Lights extends Component {
                 // console.log("Lights & disconnected lights rendered")
                 lightsContent = [...renderLights, ...renderDisconnectedLights];
             }
-
+        }
 
         return (
 
@@ -195,7 +205,7 @@ export default class Lights extends Component {
 
             </ImageBackground>
         );
-    }
+        }
 }
 /* AppRegistry.registerComponent("Dashboard", () => Dashboard); */
 const styles = EStyleSheet.create({

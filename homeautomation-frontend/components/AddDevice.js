@@ -21,11 +21,9 @@ import {
   createWindow,
 } from "./api";
 
-let entireScreenWidth = Dimensions.get("window").width;
 
-EStyleSheet.build({ $rem: entireScreenWidth / 360 });
-
-export default function Temp() {
+export default function Temp(props) {
+    EStyleSheet.build({ $rem: props.props / 360 });
     const [Device, setDevice] = useState("Please Select...")
     const [value, onChangeText] = useState("")
     const [value2, onChangeText2] = useState("")

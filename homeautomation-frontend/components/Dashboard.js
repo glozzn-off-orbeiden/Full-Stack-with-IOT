@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState,useEffect } from "react";
 import { 
     StyleSheet, 
     View, 
@@ -20,27 +20,31 @@ import { fetchStatus } from "./api";
 import alertHandler from "./alerthandler";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-let entireScreenWidth = Dimensions.get('window').width;
+// let entireScreenWidth = Dimensions.get('window').width;
 
-EStyleSheet.build({ $rem: entireScreenWidth / 360 });
+ 
 
 
 const INITIAL_VALUE = 0;
-export default class Dashboard extends Component {
-  state = {
+export default function Dashboard (props) {
+  console.log("Dashboard",props);
+ EStyleSheet.build({ $rem: props.props / 360 });  
+
+
+const[state, setState] = useState({
     Lights: "on",
     currentTemp: 34,
     Doors: "open",
     Windows: "open",
     MainDoor: "locked"
-  };
+  });
 
   fetchData = async () => {
     try {
       const data = await fetchStatus();
       // console.log("promise?", data);
 
-      this.setState({
+      setState({
         Lights: data.Lights,
         currentTemp: data.currentTemp,
         Doors: data.Doors,
@@ -53,15 +57,11 @@ export default class Dashboard extends Component {
     }
   }
 
-  componentDidMount() {
+  useEffect(() => {
+   fetchData()
 
-    this.fetchData()
+  }, [])
 
-  }
-
-
-  render() {
-    //console.log("2. fgtftdftdtfdt", this.state.Windows);
     return (
       <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
 
@@ -75,7 +75,7 @@ export default class Dashboard extends Component {
                   <Time />
                 </View>
                 <View style={styles.temp}>
-                  <Text style={styles.tempText}>{this.state.currentTemp}&#8451;</Text>
+                  <Text style={styles.tempText}>{state.currentTemp}&#8451;</Text>
                 </View>
               </View>
             </View>
@@ -86,11 +86,11 @@ export default class Dashboard extends Component {
 
             <View style={[styles.item, styles.itemStatusBox]}>
               <View
-                style={[styles.icon, { backgroundColor: this.state.Doors === "open" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
+                style={[styles.icon, { backgroundColor: state.Doors === "open" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                 <DoorIcon
                   style={{ fontSize: 30 }}
                   onPress={() => console.log("Door")}
-                  name={this.state.Doors == "open" ? "door-open" : "door-closed"}
+                  name={state.Doors == "open" ? "door-open" : "door-closed"}
                   color="rgb(255,255,255)"
                 />
               </View>
@@ -99,11 +99,11 @@ export default class Dashboard extends Component {
 
             <View style={[styles.item, styles.itemStatusBox]}>
               <View
-                style={[styles.icon, { backgroundColor: this.state.Windows === "on" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
+                style={[styles.icon, { backgroundColor:state.Windows === "on" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                 <WindowIcon
                   style={{ fontSize: 40 }}
                   onPress={() => console.log("Window")}
-                  name={this.state.Windows == "open" ? "windowso" : "windows"}
+                  name={state.Windows == "open" ? "windowso" : "windows"}
                   color="rgb(255,255,255)"
                 />
               </View>
@@ -114,7 +114,7 @@ export default class Dashboard extends Component {
 
               <View style={[styles.item, styles.itemActionBox, styles.lightAction]}>
                 <View
-                  style={[styles.icon, { backgroundColor: this.state.Lights === "on" ? "rgba(91, 194, 54, 0.9)" : "rgba(255,255,255,0.5)" }]}>
+                  style={[styles.icon, { backgroundColor:state.Lights === "on" ? "rgba(91, 194, 54, 0.9)" : "rgba(255,255,255,0.5)" }]}>
 
                   <FoundationIcon
                     style={{ fontSize: 30 }}
@@ -128,7 +128,7 @@ export default class Dashboard extends Component {
 
               <View style={[styles.item, styles.itemActionBox]}>
                 <View
-                  style={[styles.icon, { backgroundColor: this.state.MainDoor === "unlocked" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
+                  style={[styles.icon, { backgroundColor:state.MainDoor === "unlocked" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                   <KeyIcon
                       style={{ fontSize: 25 }}
                       name="key"
@@ -152,7 +152,7 @@ export default class Dashboard extends Component {
 
               <View style={[styles.item, styles.itemActionBox]}>
                 <View
-                  style={[styles.icon, { backgroundColor: this.state.Lights === "on" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
+                  style={[styles.icon, { backgroundColor: state.Lights === "on" ? "rgb(0,122,255)" : "rgba(255,255,255,0.5)" }]}>
                   <MoonIcon
                     style={{ fontSize: 35 }}
                     name="ios-moon"
@@ -172,13 +172,13 @@ export default class Dashboard extends Component {
 
           </View>
 
-          {/* <View style={styles.buffer}></View> */}
+          <View style={styles.buffer}></View>
 
         </ScrollView>
       </ImageBackground>
     );
   }
-}
+
 /* AppRegistry.registerComponent("Dashboard", () => Dashboard); */
 const styles = EStyleSheet.create({
   container: {
@@ -190,6 +190,7 @@ const styles = EStyleSheet.create({
     paddingTop: "50rem",
     paddingLeft: "20rem",
     paddingRight: "20rem",
+    height:"100%",
   },
   topPart: {
     height: "150rem",
@@ -261,7 +262,7 @@ const styles = EStyleSheet.create({
     height: "70rem",
     width: "70rem"
   },
-  // buffer: {
-  //     height: "200rem"
-  // }
+  buffer: {
+      height: 50,
+  }
 });

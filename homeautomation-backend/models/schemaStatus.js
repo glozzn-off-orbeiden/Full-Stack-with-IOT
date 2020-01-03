@@ -20,7 +20,7 @@ const schemaStatus = new Schema({
             },
             Status: {
                 type: String,
-                default: 'disconnected'
+                default: 'disconnect'
             }
 
         }
