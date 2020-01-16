@@ -152,21 +152,53 @@ export default class Temp extends Component {
     ];
     if (this.state.isLoading) {
       return (
-        <View>
-          <ActivityIndicator />
-        </View>
+
+        <ImageBackground source={require("../assets/painting-light-blue.jpg")} style={styles.container}>
+
+          <ScrollView style={styles.mainPart}>
+            <View style={styles.topPart}>
+              <View style={[styles.item, styles.tempNumbers]}>
+                <View style={styles.borderBox}>
+                  <Text style={styles.tempText}>Indoor:</Text>
+                  <Text style={styles.tempNumbersText}>22&#8451;</Text>
+                </View>
+              </View>
+              <View style={[styles.item, styles.tempNumbers]}>
+                <View style={styles.borderBox}>
+                  <Text style={styles.tempText}>Outdoor:</Text>
+                  <Text style={styles.tempNumbersText}>5&#8451;</Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.chartWrapper}>
+              <View style={styles.item}>
+                <View style={styles.chartBox}>
+                  <View>
+                    <ActivityIndicator />
+                  </View>
+                </View>
+                <View style={styles.chartInfo}>
+                  <Text style={styles.chartInfoHum}>Humidity</Text>
+                  <Text style={styles.chartInfoTemp}>Temperature</Text>
+                </View>
+              </View>
+            </View>
+
+          </ScrollView>
+        </ImageBackground>
       );
     } else {
       let sampleData = [
         {
           seriesName: "series1",
           data: this.state.newTempData,
-          color: "#297AB1"
+          color: "red"
         },
         {
           seriesName: "series2",
           data: this.state.humidityData2,
-          color: "red"
+          color: "#297AB1"
         }
       ];
       return (
@@ -193,7 +225,7 @@ export default class Temp extends Component {
             <View style={styles.chartWrapper}>
               <View style={styles.item}>
                 <View style={styles.chartBox}>
-                   <PureChart
+                  <PureChart
                     data={sampleData}
                     type={"line"}
                     showEvenNumberXaxisLabel={false}
@@ -204,12 +236,12 @@ export default class Temp extends Component {
                     yAxisColor={'black'}
                     yAxisGridLineColor={"rgba(0,0,0,0.2)"}
                     xAxisGridLineColor={"rgba(0,0,0,0.0)"}
-                  /> 
+                  />
                 </View>
 
                 <View style={styles.chartInfo}>
-                  <Text style={styles.chartInfoTemp}>Temperature</Text>
                   <Text style={styles.chartInfoHum}>Humidity</Text>
+                  <Text style={styles.chartInfoTemp}>Temperature</Text>
                 </View>
               </View>
             </View>
@@ -229,13 +261,13 @@ const styles = EStyleSheet.create({
     height: "100%",
   },
   mainPart: {
-    paddingTop: "50rem",
+    paddingTop: "30rem",
     paddingLeft: "20rem",
     paddingRight: "20rem",
   },
   topPart: {
     height: "150rem",
-    marginBottom: "40rem",
+    marginBottom: "20rem",
     flexDirection: "row",
     justifyContent: "space-between",
   },

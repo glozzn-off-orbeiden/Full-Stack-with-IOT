@@ -8,7 +8,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 export default function App() {
 const entireScreen = Dimensions.get('window');
-console.log(entireScreen);
+// console.log(entireScreen);
 EStyleSheet.build({ $rem: entireScreen.width / 360 });
   useEffect(() => {
     alertHandler();

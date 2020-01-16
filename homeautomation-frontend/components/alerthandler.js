@@ -1,7 +1,7 @@
 import {Alert} from 'react-native'
 import socket from 'socket.io-client'
 import {url} from "../config"
-const io = socket(url, { forceNew: true })
+export const io = socket(url)
 
 function alertHandler() {
     io.on("alert", function (data) {
@@ -10,7 +10,7 @@ function alertHandler() {
           data.title,
           data.message
         );
-        alert(data.title+ ":" + data.message)
+        //alert(data.title+ ":" + data.message)
       });
 }
 

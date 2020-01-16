@@ -25,7 +25,7 @@ let entireScreenWidth = Dimensions.get("window").width;
 EStyleSheet.build({ $rem: entireScreenWidth / 360 });
 
 export default function Slider(props) {
-  console.log(props);
+  // console.log(props);
 
   return (
     <Router>

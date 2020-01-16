@@ -158,7 +158,7 @@ const styles = EStyleSheet.create({
         justifyContent: "flex-end"
     },
     mainPart: {
-        paddingTop: "50rem",
+        paddingTop: "30rem",
         paddingLeft: "20rem",
         paddingRight: "20rem",
     },

@@ -20,6 +20,10 @@ async function updateTemp(token, message) {
     try {
 
         await Temp.updateOne({}, { $push: { [searchParameter]: message } }, { upsert: true, new: true }).exec(function (err, doc) {
+            if (err) {
+                console.log(err);
+                return
+            }
             console.log(doc);
 
         })
@@ -44,19 +48,25 @@ async function statusUpdate(token, message, sockets) {
     let updatedParameter = `${deviceCategory}.$.Status`;
     console.log(searchParameter);
     console.log(token);
-    
+
     try {
-        
-        Status.updateOne({[searchParameter]:token},  {[updatedParameter]:message} ,{new:true, upsert:true}).exec(function (err,doc) {
+
+        await Status.updateOne({ [searchParameter]: token }, { [updatedParameter]: message }, { new: true, upsert: true }).exec(function (err, doc) {
+            if (err) {
+                console.log(err);
+                return
+            }
             console.log(doc);
-            if(doc.nModified === 1 && doc.n === 1){
-            sockets.emit("statusChange", {Token: token,
-            Status: message})
+            if (doc.nModified === 1 && doc.n === 1) {
+                sockets.emit("statusChange", {
+                    Token: token,
+                    Status: message
+                })
             }
         })
     } catch (error) {
         console.log(error);
-        
+
     }
 }
 
